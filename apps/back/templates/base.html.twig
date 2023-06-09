@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+      <div class="container">
+        <section class="hero is-primary">
+          <div class="hero-body">
+            <p class="title">
+              Blog
+            </p>
+            <p class="subtitle">
+              Powered by Twig
+            </p>
+
+            {% if app.user %}
+              <span class="tag">Hello {{app.user.username}}!</span>
+              <a 
+                class="button is-danger" 
+                href="{{ path('app_logout') }}"
+              >
+                Logout
+              </a>
+            {% else %}
+              <a 
+                class="button" 
+                href="{{ path('app_login') }}"
+              >
+                Login
+              </a>
+
+            {% endif %}
+          </div>
+        </section>
+
+        <a class="button is-fullwidth is-info is-light" href="{{ frontPath('articles.list') }}">Go back to react</a>
+
+        {% block body %}{% endblock %}
+
+        <footer class="footer">
+          <div class="content has-text-centered">
+            <p>
+              Twig powered <strong>Symfony</strong> app. The source code is licensed
+            </p>
+            <figure class="image is-64x64">
+              <img src="https://symfony.com/logos/symfony_black_03.png">
+            </figure>
+          </div>
+        </footer>
+      </div>
+    </body>
+</html>
