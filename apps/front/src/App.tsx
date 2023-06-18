@@ -6,6 +6,7 @@ import {
 import { useMe } from './hooks/api'
 import Article from './components/Article';
 import ArticleList from './components/ArticleList';
+import './styles/main.scss'
 
 function App() {
   const me = useMe()
