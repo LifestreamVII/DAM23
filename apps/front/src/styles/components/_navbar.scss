@@ -1,0 +1,66 @@
+.navbar {
+    border-bottom: 1px $light-grey solid;
+}
+
+.navbar__wrapper {
+    max-width: 1290px;
+
+    padding: 0.875rem 1.563em;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar__logo {
+    height: 3.125rem;
+}
+
+.searchbar {
+    width: 100%;
+    height: 2.813rem;
+    box-sizing: border-box;
+    max-width: 350px;
+
+    padding: 0.313rem 1rem;
+
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+
+    background-color: $light-grey;
+    border-radius: 1.875rem;
+}
+
+.searchbar__button {
+    width: 30px;
+    height: 30px;
+
+    border: none;
+    border-radius: 100%;
+}
+
+.searchbar__icon {
+    width: 100%;
+    height: 100%;
+}
+
+.searchbar__input {
+    flex-grow: 1;
+    
+    border: none;
+    background-color: transparent;
+}
+
+.login-link {
+    display: flex;
+    padding: 0.500rem 0;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.688rem;
+
+    span {
+        font-size: 0.875em;
+        font-weight: 500;
+    }
+}
