@@ -1,15 +1,17 @@
 .navbar {
-    border-bottom: 1px $light-grey solid;
+    border-bottom: 1px $grey-1 solid;
 }
 
 .navbar__wrapper {
     max-width: 1290px;
 
-    padding: 0.875rem 1.563em;
     margin: auto;
+    padding: 0.875rem $side-padding;
 
     display: flex;
     justify-content: space-between;
+
+    box-sizing: border-box;
 }
 
 .navbar__logo {
@@ -19,7 +21,6 @@
 .searchbar {
     width: 100%;
     height: 2.813rem;
-    box-sizing: border-box;
     max-width: 350px;
 
     padding: 0.313rem 1rem;
@@ -28,8 +29,9 @@
     align-items: center;
     gap: 0.625rem;
 
-    background-color: $light-grey;
+    background-color: $grey-1;
     border-radius: 1.875rem;
+    box-sizing: border-box;
 }
 
 .searchbar__button {
@@ -53,8 +55,9 @@
 }
 
 .login-link {
-    display: flex;
     padding: 0.500rem 0;
+
+    display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 0.688rem;

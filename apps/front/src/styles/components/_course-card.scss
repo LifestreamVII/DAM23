@@ -1,0 +1,53 @@
+.course-card {
+    max-width: 310px;
+
+    display: block;
+}
+
+.course-card__preview {
+    aspect-ratio: 16/9;
+
+    background-color: $grey-1;
+}
+
+.course-card__content {
+    padding: 0.625em;
+}
+
+.course-card__properties {
+    margin-bottom: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 0.875em;
+}
+
+.course-card__type {
+    text-transform: uppercase;
+}
+
+.course-card__infos {
+    span {
+        color: $grey-2;
+    }
+}
+
+.course-card__title {
+    margin-bottom: 0.313em;
+
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.course-card__professor {
+    margin-bottom: 0.625rem;
+
+    font-size: 0.875em;
+    color: $grey-3;
+}
+
+.course-card__description {
+    font-size: 0.875em;
+    line-height: 1.3;
+}
