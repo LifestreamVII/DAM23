@@ -1,5 +1,7 @@
 import CourseCard from "../components/CourseCard";
 import { CourseProps } from "../components/CourseCard";
+import headerImg from "../assets/media/header-image-min.jpg";
+import Carousel from "../components/Carousel";
 
 const pianoCourse: CourseProps = {
     id: 1,
@@ -18,13 +20,22 @@ export default function Home() {
     return (
         <div className="home">
             <header className="home__header">
-                <img src="" alt="" />
-                <h1></h1>
+                <img className="home__hero" src={headerImg} alt="" />
+                <h1>Faites partie des meilleurs musiciens au monde</h1>
             </header>
             <main className="home__content">
                 <section>
-                    <h2></h2>
-                    
+                    <h2 className="align-center">Nouveautés</h2>
+                    <Carousel>
+                        <CourseCard course={pianoCourse} />
+                        <CourseCard course={pianoCourse} />
+                        <CourseCard course={pianoCourse} />
+                        <CourseCard course={pianoCourse} />
+                        <CourseCard course={pianoCourse} />
+                        <CourseCard course={pianoCourse} />
+                        <CourseCard course={pianoCourse} />
+                        <CourseCard course={pianoCourse} />
+                    </Carousel>
                 </section>
             </main>
         </div>

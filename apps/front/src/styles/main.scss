@@ -1,9 +1,10 @@
+@import './utils/variables';
+
 @import './base/reset';
 @import './base/global';
 
-@import './utils/variables';
-
 @import './components/navbar';
 @import './components/course-card';
+@import './components/carousel';
 
 @import './pages/home';
