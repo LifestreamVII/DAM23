@@ -50,8 +50,36 @@ services:
     ports:
       - "3000:3000"
 
+  db:
+    image: mariadb:10.8.2
+    container_name: mariadb_docker
+    restart: always
+    volumes:
+        - db-data:/var/lib/mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: 'ChangeMeLater'
+    networks:
+        - monitoring
+
+
+  pma:
+    image: phpmyadmin:latest
+    restart: always
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - 29001:80
+    depends_on:
+      - db
+    volumes:
+      - pma-data:/var/lib/phpmyadmin/data
+    networks:
+      - monitoring
+
 volumes:
   nodemodules: {}
+  db-data:
+  pma-data:
 
 networks:
   monitoring:
