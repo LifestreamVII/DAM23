@@ -2,7 +2,6 @@
 # Dependency directories
 node_modules/
 jspm_packages/
-.env
 
 # Cache and logs (Symfony2)
 app/cache/*

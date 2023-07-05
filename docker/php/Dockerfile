@@ -29,6 +29,8 @@ RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} >
     && printf '[PHP]\ndate.timezone = "%s"\n', ${TIMEZONE} > /usr/local/etc/php/conf.d/tzone.ini \
     && "date"
 
+RUN docker-php-ext-install pdo pdo_mysql opcache intl zip calendar dom mbstring gd xsl
+
 CMD ["php-fpm", "-F"]
 
 COPY . /var/www/api
