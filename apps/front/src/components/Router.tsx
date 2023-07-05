@@ -4,13 +4,36 @@ import {
 	Route
 } from 'react-router-dom';
 import Home from '../pages/Home';
+import Browse from '../pages/Browse';
+import Register from '../pages/Register';
+import NavBar from './NavBar';
 
 export default function Router() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/"><Home /></Route>
+                <Route path="/browse">
+                    <DefaultContainer>
+                        <Browse />
+                    </DefaultContainer>
+                </Route>
+                <Route path="/login"><Register type={'login'} /></Route>
+                <Route path="/signup"><Register type={'signup'} /></Route>
+                <Route path="/">
+                    <DefaultContainer>
+                        <Home />
+                    </DefaultContainer>
+                </Route>
             </Switch>
         </BrowserRouter>
+    )
+}
+
+function DefaultContainer({children} : { children: React.ReactNode }) {
+    return (
+        <>
+            <NavBar />
+            {children}
+        </>
     )
 }

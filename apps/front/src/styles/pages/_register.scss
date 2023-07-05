@@ -1,0 +1,99 @@
+.register {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+.register__content {
+    flex: 1;
+}
+
+.register__background {
+    min-height: 100vh;
+
+    flex: 1;
+    background-color: $primary-color-08;
+}
+
+.register__arrow{
+    position: absolute;
+    top: $side-padding;
+    left: $side-padding;
+
+    img {
+        height: 30px;
+        transform: scaleX(-1);
+    }
+}
+
+.register__form {
+    max-width: 400px;
+    margin: auto;
+}
+
+.register__title {
+    margin-bottom: 60px;
+
+    font-size: 3rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.register__input {
+    width: 100%;
+    position: relative;
+
+    input {
+        width: 100%;
+
+        padding: 1rem;
+        margin-bottom: 40px;
+
+        display: block;
+        background-color: $grey-1;
+
+        border: none;
+        border-radius: 8px;
+
+        box-sizing: border-box;
+    }
+
+    label {
+        position: absolute;
+        top: -8px;
+        
+        font-size: 0.875rem;
+
+        transform: translateY(-100%);
+    }
+}
+
+.register__button {
+    padding: 0.625rem 2rem;
+
+    font-size: 1.125em;
+    font-weight: 500;
+    color: #fff;
+    text-transform: capitalize;
+
+    border: none;
+    border-radius: 8px;
+    background-color: $primary-color-08;
+
+    cursor: pointer;
+}
+
+.register__redirect {
+    margin-top: 20px;
+
+    font-size: 0.875rem;
+    color: $grey-4;
+
+    a {
+        color: #000;
+        font-weight: 500;
+        text-decoration: underline;
+        text-transform: capitalize;
+    }
+}

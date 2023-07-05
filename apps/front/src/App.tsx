@@ -6,10 +6,7 @@ function App() {
 	const me = useMe()
 
 	return (
-		<>
-			<NavBar />
-			<Router />
-		</>
+		<Router />
 	)
 }
 
