@@ -7,6 +7,7 @@ import Home from '../pages/Home';
 import Browse from '../pages/Browse';
 import Register from '../pages/Register';
 import NavBar from './NavBar';
+import Course from '../pages/Course';
 
 export default function Router() {
     return (
@@ -19,6 +20,11 @@ export default function Router() {
                 </Route>
                 <Route path="/login"><Register type={'login'} /></Route>
                 <Route path="/signup"><Register type={'signup'} /></Route>
+                <Route path="/cours/:id">
+                    <DefaultContainer>
+                        <Course />
+                    </DefaultContainer>
+                </Route>
                 <Route path="/">
                     <DefaultContainer>
                         <Home />

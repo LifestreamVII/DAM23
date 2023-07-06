@@ -1,6 +1,6 @@
 import CourseCard from "../components/CourseCard";
 import { CourseProps } from "../components/CourseCard";
-import headerImg from "../assets/media/header-image-min.jpg";
+import headerImg from "../assets/images/header-image-min.jpg";
 import Carousel from "../components/Carousel";
 
 const pianoCourse: CourseProps = {
