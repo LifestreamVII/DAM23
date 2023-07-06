@@ -27,7 +27,7 @@ export default function Carousel({children} : CarouselProps) {
     }
 
     return (
-        <div className="carousel align-center">
+        <div className="carousel container-center">
             <button className="carousel__button carousel__button--left" onClick={scrollLeft}>
                 <img src={arrow} alt="" />
             </button>
