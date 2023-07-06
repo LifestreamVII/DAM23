@@ -9,6 +9,7 @@ RUN apk update \
         zlib \
         zlib-dev \
         patch \
+        libzip-dev \ 
         icu-dev \
         linux-headers
 
