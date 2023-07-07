@@ -1,28 +1,24 @@
 import { useRef } from 'react';
 import arrow from '../assets/images/arrow.svg'
 
-type CarouselProps = {
-    children: JSX.Element[]
-}
-
-function getScrollSize(carousel: HTMLDivElement) {
+function getScrollSize(carousel) {
     const gapWidth = 20
     const slideWidth = carousel.offsetWidth - gapWidth
     const visibleSlides = Math.floor(carousel.clientWidth / slideWidth)
     return slideWidth * visibleSlides
 }
 
-export default function Carousel({children} : CarouselProps) {
+export default function Carousel({children}) {
     
-    const carouselWrapper = useRef<HTMLDivElement>(null);
+    const carouselWrapper = useRef(null);
 
     function scrollRight() {
-        const carousel = carouselWrapper.current!
+        const carousel = carouselWrapper.current
         carousel.scrollLeft += getScrollSize(carousel)
     }
 
     function scrollLeft() {
-        const carousel = carouselWrapper.current!
+        const carousel = carouselWrapper.current
         carousel.scrollLeft -= getScrollSize(carousel)
     }
 

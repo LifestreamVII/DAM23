@@ -3,10 +3,21 @@
 
     display: flex;
     align-items: center;
+
+    &--reverse {
+        flex-direction: row-reverse;
+    } 
 }
 
 .register__content {
+    min-height: 100vh;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex: 1;
+
+    position: relative;
 }
 
 .register__background {
@@ -28,8 +39,8 @@
 }
 
 .register__form {
+    width: 100%;
     max-width: 400px;
-    margin: auto;
 }
 
 .register__title {

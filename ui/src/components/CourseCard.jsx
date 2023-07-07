@@ -1,20 +1,8 @@
-export type CourseProps = {
-    id: number,
-    preview: string,
-    title: string,
-    professor: string,
-    description: string,
-    type: string,
-    instrument: string,
-    duration: number,
-    difficulty: string
-}
-
-function truncateString(str: string, maxLength: number) {
+function truncateString(str, maxLength) {
     return str.substring(0, maxLength)
 }
 
-export default function CourseCard({course} : {course: CourseProps}) {
+export default function CourseCard({course}) {
 
     const descrition = `${truncateString(course.description, 80)}...`
 

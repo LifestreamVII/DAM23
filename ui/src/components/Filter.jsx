@@ -1,24 +1,16 @@
 import { useState, useRef } from 'react'
 import arrowGrey from '../assets/images/arrow-grey.svg'
 
-type FilterProps = {
-    id: number,
-    options: string[],
-    name: string,
-    openSelectId: number | null,
-    handleSetOpenSelectId: (id: number | null) => void,
-}
-
-export default function Filter(props: FilterProps) {
+export default function Filter(props) {
 
     const {id, options, name, openSelectId, handleSetOpenSelectId} = props
 
-    const filterWrapper = useRef<HTMLDivElement>(null)
-    const [currentOptions, setCurrentOptions] = useState<string[]>([])
+    const filterWrapper = useRef(null)
+    const [currentOptions, setCurrentOptions] = useState([])
 
-    function handleSetCurrentOption(option: string) {
+    function handleSetCurrentOption(option) {
         if (currentOptions.includes(option)) {
-            setCurrentOptions((prev) => prev.filter((item) => item != option))
+            setCurrentOptions((prev) => prev.filter((item) => item !== option))
             return
         }
         console.log(currentOptions)
@@ -26,7 +18,7 @@ export default function Filter(props: FilterProps) {
     }
 
     return (
-        <div ref={filterWrapper} className={`select ${openSelectId == id ? 'select--open' : null}`}>
+        <div ref={filterWrapper} className={`select ${openSelectId === id ? 'select--open' : null}`}>
             <button className="option" onClick={() => handleSetOpenSelectId(id)}>
                 <span className="option__name">{name}</span>
                 <img className="option__arrow" src={arrowGrey} alt="" />

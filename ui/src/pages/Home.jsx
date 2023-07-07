@@ -1,9 +1,8 @@
 import CourseCard from "../components/CourseCard";
-import { CourseProps } from "../components/CourseCard";
 import headerImg from "../assets/images/header-image-min.jpg";
 import Carousel from "../components/Carousel";
 
-const pianoCourse: CourseProps = {
+const pianoCourse = {
     id: 1,
     preview: "https://www.youtube.com/embed/9bZkp7q19f0",
     title: "Concerto No. 5 in A Major, 1st movement",

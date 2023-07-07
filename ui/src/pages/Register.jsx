@@ -1,10 +1,6 @@
 import arrow from '../assets/images/arrow.svg'
 
-type RegisterProps = {
-    type: "login" | "signup"
-}
-
-export default function Register({type}: RegisterProps) {
+export default function Register({type}) {
 
     return (
         <div className="register">

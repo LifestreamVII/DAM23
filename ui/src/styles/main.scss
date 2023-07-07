@@ -1,0 +1,14 @@
+@import "./base/reset";
+@import "./utils/variables";
+@import "./base/global";
+
+
+@import "./components/carousel";
+@import "./components/course-card";
+@import "./components/filters";
+@import "./components/navbar";
+
+@import "./pages/browse";
+@import "./pages/course";
+@import "./pages/home";
+@import "./pages/register";

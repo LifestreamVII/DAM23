@@ -1,12 +1,12 @@
 import { useState } from "react"
-import Filter from "../components/Filter"
+import Filter from "./Filter"
 
 export default function Filters() {
 
-    const [openSelectId, setOpenSelectId] = useState<number | null>(null)
+    const [openSelectId, setOpenSelectId] = useState(null)
 
-    function handleSetOpenSelectId(id: number | null) {
-        openSelectId == id ? setOpenSelectId(null) : setOpenSelectId(id)
+    function handleSetOpenSelectId(id) {
+        openSelectId === id ? setOpenSelectId(null) : setOpenSelectId(id)
     }
 
     const filtersList = [
