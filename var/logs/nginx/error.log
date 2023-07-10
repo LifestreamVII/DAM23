@@ -1,0 +1,6 @@
+2023/07/10 10:30:10 [emerg] 1#1: host not found in upstream "client:3000" in /etc/nginx/conf.d/api.conf:2
+2023/07/10 10:30:19 [emerg] 1#1: host not found in upstream "client:3000" in /etc/nginx/conf.d/api.conf:2
+2023/07/10 10:30:27 [emerg] 1#1: host not found in upstream "client:3000" in /etc/nginx/conf.d/api.conf:2
+2023/07/10 10:30:36 [emerg] 1#1: host not found in upstream "client:3000" in /etc/nginx/conf.d/api.conf:2
+2023/07/10 10:30:44 [emerg] 1#1: host not found in upstream "client:3000" in /etc/nginx/conf.d/api.conf:2
+2023/07/10 10:30:53 [emerg] 1#1: host not found in upstream "client:3000" in /etc/nginx/conf.d/api.conf:2
