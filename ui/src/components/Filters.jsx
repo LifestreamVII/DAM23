@@ -21,7 +21,7 @@ export default function Filters() {
     ]
 
     return (
-        <section className="filters border-bottom-grey">
+        <section className="filters border-bottom--space">
             { filtersList.map((filter, index) => 
                 <Filter key={index} id={index} name={filter.defaultOption} options={filter.options} openSelectId={openSelectId} handleSetOpenSelectId={handleSetOpenSelectId} />
             )}

@@ -18,7 +18,7 @@ export default function Register({type}) {
                         <input type="password" id="register-password" placeholder="" />
                         <label htmlFor="register-password">Mot de passe</label>
                     </div>
-                    <button className="register__button" type="submit">{type}</button>
+                    <button className="btn" type="submit">{type}</button>
                     <p className="register__redirect">Pas encore de compte ? <a href={`/${type === 'login' ? 'signup' : 'login'}`}>{type === 'login' ? 'signup' : 'login'}</a></p>
                 </form>
             </section>

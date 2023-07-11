@@ -1,4 +1,7 @@
 import { useParams } from "react-router-dom"
+import video from "../assets/videos/plein-air-min.mp4"
+import { useState } from "react"
+import ChapterButton from "../components/ChapterButton"
 
 const course = {
     id: 1,
@@ -15,15 +18,29 @@ const course = {
 
 export default function Course() {
 
+    const [currentChapter, setCurrentChapter] = useState(1)
+
     const id = useParams().id
 
     return (
         <div className="course container-center">
-            <h2 className="course__professor">{course.professor}</h2>
+            <p className="course__professor">{course.professor}</p>
             <h1 className="course__title">{course.title}</h1>
-            <h1 className="course__compositor">{course.compositor}</h1>
-
-            <p className="course__description">{course.description}</p>
+            <h2 className="course__compositor">{course.compositor}</h2>
+            <div className="course__video-wrapper">
+                <video className="course__video" src={video} controls></video>
+                <div className="course__chapters">
+                    <ChapterButton currentChapter={currentChapter} setCurrentChapter={setCurrentChapter} chapterTitle="Chapitre 1" />
+                    <ChapterButton currentChapter={currentChapter} setCurrentChapter={setCurrentChapter} chapterTitle="Chapitre 2" />
+                    <ChapterButton currentChapter={currentChapter} setCurrentChapter={setCurrentChapter} chapterTitle="Chapitre 3" />
+                    <ChapterButton currentChapter={currentChapter} setCurrentChapter={setCurrentChapter} chapterTitle="Chapitre 4" />
+                    <ChapterButton currentChapter={currentChapter} setCurrentChapter={setCurrentChapter} chapterTitle="Chapitre 5" />
+                </div>
+            </div>
+            <section>
+                <p className="course__description">{course.description}</p>
+                <a href="" download className="btn course__btn">Télécharger la partition</a>
+            </section>
         </div>
     )
 }

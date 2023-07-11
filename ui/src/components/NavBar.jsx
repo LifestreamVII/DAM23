@@ -15,7 +15,7 @@ function SearchBar() {
 
 export default function NavBar() {
     return (
-        <nav className="navbar">
+        <nav className="navbar border-bottom">
             <div className="navbar__wrapper">
                 <a href='/'>
                     <img className="navbar__logo" src={logo} alt="Saline Royale Academy" />
