@@ -29,6 +29,9 @@ class Task
 
     #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'tasks')]
     private Collection $projects;
+    
+    #[ORM\Column(type: "string", enumType: TaskStatus::class)]
+    private TaskStatus $status;
 
     public function __construct()
     {

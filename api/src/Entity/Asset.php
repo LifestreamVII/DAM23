@@ -31,6 +31,12 @@ class Asset
     #[ORM\OneToMany(mappedBy: 'asset', targetEntity: AssetHistory::class)]
     private Collection $assetHistory;
 
+    #[ORM\Column(type: "string", enumType: AssetStatus::class)]
+    private AssetStatus $status;
+
+    #[ORM\Column(type: "string", enumType: AssetType::class)]
+    private AssetType $type;
+
     public function __construct()
     {
         $this->assetHistory = new ArrayCollection();
