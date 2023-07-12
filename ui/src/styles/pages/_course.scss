@@ -1,0 +1,51 @@
+.course {
+    padding-top: 80px;
+}
+
+.course__title {
+    margin: 1.2rem 0 .3rem 0;
+
+    font-size: 1.625rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.course__professor {
+    font-size: 1.25rem;
+    color: $grey-3;
+}
+
+.course__compositor {
+    font-size: 1.5rem;
+}
+
+.course__video-wrapper {
+    margin: 2rem 0;
+
+    display: flex;
+}
+
+.course__video {
+    width: 80%;
+    // max-width: 900px;
+    // aspect-ratio: 16/9;
+    
+}
+
+.course__chapters {
+    width: 20%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.course__description {
+    max-width: 900px;
+
+    margin-bottom: 2rem;
+}
+
+.course__btn {
+    font-size: 1rem;
+}

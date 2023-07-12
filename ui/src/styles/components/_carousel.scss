@@ -1,0 +1,45 @@
+.carousel {
+    height: 330px;
+    max-width: none;
+
+    padding: 0;
+    margin: 1.875rem auto;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.carousel__wrapper {
+    height: 360px;
+
+    padding: 0 calc((100vw - $max-width) / 2);
+
+    display: flex;
+    gap: 20px;
+    
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+.carousel__button {
+    position: absolute;
+    top: 50%;
+
+    background-color: transparent;
+    border: none;
+
+    transform: translateY(-50%);
+
+    &--left {
+        left: $side-padding;
+
+        img {
+            transform: scaleX(-1);
+        }
+    }
+
+    &--right {
+        right: $side-padding;
+    }
+}

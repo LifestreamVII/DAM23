@@ -1,0 +1,18 @@
+.chapter-button {
+    padding: 0.625rem 2rem;
+
+    font-size: 1.125em;
+    text-align: left;
+
+    transition: color .2s ease-out, background-color .2s ease-out;
+    
+    &--current {
+        background-color: $primary-color-10;
+        color: #fff;
+    }
+
+    &:hover {
+        background-color: $primary-color-10;
+        color: #fff;
+    }
+}

@@ -24,6 +24,10 @@ class Subtitle
     #[ORM\Column]
     private ?int $endTime = null;
 
+    #[ORM\ManyToOne(inversedBy: 'subtitles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Metadata $metadata = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +65,18 @@ class Subtitle
     public function setEndTime(int $endTime): static
     {
         $this->endTime = $endTime;
+
+        return $this;
+    }
+
+    public function getMetadata(): ?Metadata
+    {
+        return $this->metadata;
+    }
+
+    public function setMetadata(?Metadata $metadata): static
+    {
+        $this->metadata = $metadata;
 
         return $this;
     }
