@@ -1,0 +1,17 @@
+.browse {
+    max-width: $max-width;
+
+    margin: auto;
+    padding: 0 $side-padding 0;
+}
+
+.browse__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px 20px;
+
+    .course-card {
+        min-width: 0;
+        flex-basis: calc(25% - 15px);
+    }
+}

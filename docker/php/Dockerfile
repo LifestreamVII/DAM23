@@ -9,8 +9,13 @@ RUN apk update \
         zlib \
         zlib-dev \
         patch \
+        libzip-dev \ 
         icu-dev \
-        linux-headers
+        linux-headers \
+        libxml2-dev \
+        oniguruma-dev \
+        libpng-dev \
+        libxslt-dev
 
 # install php dependencies
 RUN apk add --no-cache $PHPIZE_DEPS \
