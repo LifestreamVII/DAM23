@@ -25,6 +25,9 @@ class TaskHistory
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $completeDate = null;
 
+    #[ORM\Column(type: "string", enumType: TaskStatus::class)]
+    private TaskStatus $status;
+
     public function getId(): ?int
     {
         return $this->id;
