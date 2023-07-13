@@ -7,8 +7,9 @@ export default function Signup() {
 
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
-    const [message, setMessage] = useState(false)
     const [password, setPassword] = useState('')
+    const [message, setMessage] = useState(false)
+    
     const createUser = useCreateUser
 
     function handleSubmit(e) {
@@ -40,7 +41,7 @@ export default function Signup() {
                         <label htmlFor="register-password">Mot de passe</label>
                     </div>
                     <button className="btn" type="submit">Signup</button>
-                    <p className="register__redirect">Pas encore de compte ? <a href="/login">Login</a></p>
+                    <p className="register__redirect">Déjà un compte ? <a href="/login">Login</a></p>
                 </form>
             </section>
             <div className="register__background">

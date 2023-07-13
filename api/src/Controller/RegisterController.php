@@ -17,20 +17,26 @@ use Firebase\JWT\JWT;
 class RegisterController extends AbstractController
 {
     #[Route('/login', name: 'app_login')]
-    public function show(Request $request,EntityManagerInterface $entityManager, string $appSecret): JsonResponse
+    public function show(Request $request,EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher, string $appSecret): JsonResponse
     {
         $password = $request->request->get('password');
         $mail = $request->request->get('mail');
 
         $user = $entityManager->getRepository(User::class)->findOneBy(['mail' => $mail]);
 
-        if (!$user) {
+        if (!$mail || !$password) {
             return $this->json([
-                'message' => 'No user found with this mail adress : '.$mail,
+                'message' => 'Veuillez remplir tous les champs',
             ], Response::HTTP_UNAUTHORIZED);
         }
 
-        if ($user->getPassword() !== $password) {
+        if (!$user) {
+            return $this->json([
+                'message' => "Aucun utilisateur trouvé avec l'adresse mail : ".$mail,
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        if (!$hasher->isPasswordValid($user, $password)) {
             return $this->json([
                 'message' => 'Wrong password',
             ], Response::HTTP_UNAUTHORIZED);
@@ -93,7 +99,7 @@ class RegisterController extends AbstractController
         $entityManager->flush();
 
         return $this->json([
-            'message' => 'New user created'
+            'message' => 'Nouvel utilisateur créé avec succès !'
         ], Response::HTTP_CREATED);
     }
 

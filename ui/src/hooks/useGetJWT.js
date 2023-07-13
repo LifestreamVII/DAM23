@@ -10,6 +10,5 @@ export default async function useGetJWT(mail, pwd) {
         })
     });
 
-    const json = await data.json();
-    return await json.jwt;
+    return await data.json();
 }
