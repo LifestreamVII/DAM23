@@ -1,13 +1,14 @@
 import arrow from '../assets/images/arrow.svg'
 import { useState } from 'react'
 import useCreateUser from '../hooks/useCreateUser'
+import MessageBox from '../components/MessageBox'
 
 export default function Signup() {
 
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
+    const [message, setMessage] = useState(false)
     const [password, setPassword] = useState('')
-    const [message, setMessage] = useState('')
     const createUser = useCreateUser
 
     function handleSubmit(e) {
@@ -24,6 +25,7 @@ export default function Signup() {
                     <img src={arrow} alt="" />
                 </a>
                 <form action="" className="register__form" onSubmit={handleSubmit}>
+                    {message ? <MessageBox message={message} setMessage={setMessage} /> : null}
                     <h1 className="register__title">Signup</h1>
                     <div className="register__input">
                         <input type="text" id="register-username" onChange={e => setUsername(e.target.value)} />

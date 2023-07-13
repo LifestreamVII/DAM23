@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 use Firebase\JWT\JWT;
 
 class RegisterController extends AbstractController
@@ -55,11 +57,32 @@ class RegisterController extends AbstractController
     }
 
     #[Route('/signup', name: 'app_signup')]
-    public function createUser(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher): JsonResponse
+    public function createUser(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher, ValidatorInterface $validator): JsonResponse
     {
         $username = $request->request->get('username');
         $password = $request->request->get('password');
         $mail = $request->request->get('mail');
+
+        $isEmailValid = $this->validateEmail($mail, $validator);
+        $EmailAlreadyUsed = $entityManager->getRepository(User::class)->findOneBy(['mail' => $mail]);
+
+        if (!$username || !$password || !$mail) {
+            return $this->json([
+                'message' => 'Veuillez remplir tous les champs',
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        if (!$isEmailValid) {
+            return $this->json([
+                'message' => "L'adresse email n'est pas valide",
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        if ($EmailAlreadyUsed) {
+            return $this->json([
+                'message' => 'Cette adresse email est déjà utilisée',
+            ], Response::HTTP_UNAUTHORIZED);
+        }
 
         $user = new User();
         $user->setMail($mail)
@@ -70,10 +93,15 @@ class RegisterController extends AbstractController
         $entityManager->flush();
 
         return $this->json([
-            'message' => 'New user created',
-            'username' => $username,
-            'mail' => $mail,
-            'password' => $password
+            'message' => 'New user created'
+        ], Response::HTTP_CREATED);
+    }
+
+    public function validateEmail(string $email, ValidatorInterface $validator) {
+        $errors = $validator->validate($email , [
+            new EmailConstraint()
         ]);
+
+        return count($errors) < 1;
     }
 }
