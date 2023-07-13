@@ -1,4 +1,4 @@
-export const useGetJWT = async (mail, pwd) => {
+export default async function useGetJWT(mail, pwd) {
     const data = await fetch('http://localhost:90/login', {
         method: 'POST',
         headers: new Headers({

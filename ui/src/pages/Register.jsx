@@ -25,7 +25,6 @@ export default function Register({type}) {
         console.log('submit')
     }
 
-
     return (
         <div className="register">
             <section className="register__content">

@@ -57,21 +57,23 @@ class RegisterController extends AbstractController
     #[Route('/signup', name: 'app_signup')]
     public function createUser(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher): JsonResponse
     {
+        $username = $request->request->get('username');
         $password = $request->request->get('password');
         $mail = $request->request->get('mail');
 
         $user = new User();
-        $user->setPassword($hasher->hashPassword($user, $password))
-            ->setMail($mail)
-            ->setUsername('username');
+        $user->setMail($mail)
+            ->setUsername($username)
+            ->setPassword($hasher->hashPassword($user, $password));
 
         $entityManager->persist($user);
         $entityManager->flush();
 
         return $this->json([
             'message' => 'New user created',
-            'password' => $password,
-            'mail' => $mail
+            'username' => $username,
+            'mail' => $mail,
+            'password' => $password
         ]);
     }
 }
