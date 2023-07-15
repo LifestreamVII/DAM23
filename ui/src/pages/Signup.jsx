@@ -15,7 +15,7 @@ export default function Signup() {
     function handleSubmit(e) {
         e.preventDefault()
         createUser(username, email, password).then(data => {
-            setMessage(data)
+            setMessage(data.message)
         })
     }
 
