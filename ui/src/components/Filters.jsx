@@ -25,18 +25,14 @@ export default function Filters() {
     function handleSetTagsSelected(name, tag) {
         if (!tagsSelected[name]) {
             setTagsSelected({...tagsSelected, [name]: [tag]})
-            console.log(tagsSelected)
             return
         }
         if (tagsSelected[name].includes(tag)) {
             const newTags = tagsSelected[name].filter((item) => item !== tag)
-            console.log(newTags)
             setTagsSelected({...tagsSelected, [name]: newTags})
-            console.log(tagsSelected)
             return
         }
         setTagsSelected({...tagsSelected, [name]: [...tagsSelected[name], tag]})
-        console.log(tagsSelected)
     }
 
     return (
