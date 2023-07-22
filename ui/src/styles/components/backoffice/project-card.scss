@@ -1,0 +1,49 @@
+.project-card {
+    min-height: 100px;
+
+    padding: 10px;
+
+    flex-basis: calc(20% - 20px);
+
+    background-color: #fff;
+    border: 1px $grey-2 solid;
+    
+    &--btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        color: #fff;
+
+        background-color: $primary-color-08;
+        border-color: $primary-color-10;
+        box-sizing: content-box;
+    }
+}
+
+.project-card__plus {
+    width: 20px;
+}
+
+.project-card__completion {
+    margin-bottom: 1rem;
+    
+    display: block;
+    
+    font-size: 0.813rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $secondary-color-06;
+}
+
+.project-card__title {
+    margin: .5rem 0;
+    
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.project-card__description {
+    font-size: 0.875em;
+}
