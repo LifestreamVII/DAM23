@@ -15,6 +15,10 @@
 @import "./pages/home";
 @import "./pages/register";
 
-@import "./components/backoffice/project-card.scss";
+@import "./components/back-office/back-office.scss";
+@import "./components/back-office/side-menu.scss";
+@import "./components/back-office/pop-up.scss";
+@import "./components/back-office/project-card.scss";
 
-@import "./pages/backoffice/dashboard.scss";
+@import "./pages/back-office/dashboard.scss";
+@import "./pages/back-office/projects.scss";

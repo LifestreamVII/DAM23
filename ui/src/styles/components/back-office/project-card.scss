@@ -20,6 +20,10 @@
         border-color: $primary-color-10;
         box-sizing: content-box;
     }
+
+    &:hover {
+        border-color: $secondary-color-06;
+    }
 }
 
 .project-card__plus {
