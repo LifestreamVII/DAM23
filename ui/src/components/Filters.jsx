@@ -9,21 +9,36 @@ export default function Filters() {
         openSelectId === id ? setOpenSelectId(null) : setOpenSelectId(id)
     }
 
+    const [tagsSelected, setTagsSelected] = useState({})
+
     const filtersList = [
         {
-            defaultOption: "instrument",
-            options: ["instrument", "test", "test2"]
+            name: "instrument",
+            tags: ["violon", "piano", "guitare", "flûte"],
         },
         {
-            defaultOption: "instrument",
-            options: ["instrument", "test", "test2"]
+            name: "compositeur",
+            tags: ["Mozart", "Chopin", "Beethoven", "Bach"],
         }
     ]
+
+    function handleSetTagsSelected(name, tag) {
+        if (!tagsSelected[name]) {
+            setTagsSelected({...tagsSelected, [name]: [tag]})
+            return
+        }
+        if (tagsSelected[name].includes(tag)) {
+            const newTags = tagsSelected[name].filter((item) => item !== tag)
+            setTagsSelected({...tagsSelected, [name]: newTags})
+            return
+        }
+        setTagsSelected({...tagsSelected, [name]: [...tagsSelected[name], tag]})
+    }
 
     return (
         <section className="filters border-bottom--space">
             { filtersList.map((filter, index) => 
-                <Filter key={index} id={index} name={filter.defaultOption} options={filter.options} openSelectId={openSelectId} handleSetOpenSelectId={handleSetOpenSelectId} />
+                <Filter key={index}  id={index} name={filter.name} tags={filter.tags} openSelectId={openSelectId} handleSetOpenSelectId={handleSetOpenSelectId} tagsSelected={tagsSelected} handleSetTagsSelected={handleSetTagsSelected} />
             )}
         </section>
     )

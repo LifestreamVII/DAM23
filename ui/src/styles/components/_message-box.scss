@@ -1,0 +1,25 @@
+.message-box {
+    max-width: 500px;
+    
+    padding: 0.625rem 1rem;
+
+    position: fixed;
+    top: 50px;
+    left: 50%;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    border-radius: 8px;
+    color: white;
+
+    border: #CE3BB1 3px solid;
+    background-color: #D65CBE;
+    
+    transform: translateX(-50%);
+}
+
+.message-box__icon {
+    width: 25px;
+}
