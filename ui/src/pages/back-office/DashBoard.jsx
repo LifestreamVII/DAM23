@@ -1,4 +1,4 @@
-import ProjectCard, { ProjectCardButton } from "../../components/back-office/ProjectCard"
+import {ProjectCard, ProjectCardButton } from "../../components/back-office/Project"
 
 export default function DashBoard() {
     return (

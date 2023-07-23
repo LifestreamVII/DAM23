@@ -1,7 +1,7 @@
 import cross from '../../assets/images/icon-cross.svg';
 import { Link, useLocation } from "react-router-dom"
 
-export default function PopUp() {
+export default function PopUp({ children }) {
 
     const { state: { from } } = useLocation();
     
@@ -11,6 +11,7 @@ export default function PopUp() {
                 <Link to={from}>
                     <img className="pop-up__cross" src={cross} alt="" />
                 </Link>
+                {children}
             </div>
         </div>
     )

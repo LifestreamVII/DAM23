@@ -1,7 +1,18 @@
 import plus from "../../assets/images/icon-plus.svg"
 import { Link, useLocation } from "react-router-dom"
+import Process from "./Process"
 
-export default function ProjectCard({ title, description, completion, id }) {
+export default function Project() {
+    return (
+        <div className="project">
+            <p className="project__completion">en cours</p>
+            <h2 className="project__title">Masterclasse de Miriam Fried</h2>
+            <Process />
+        </div>
+    )
+}
+
+export function ProjectCard({ title, description, completion, id }) {
 
     const truncatedDescription = description.length > 100 ? description.substring(0, 100) + "..." : description
     const { pathname } = useLocation()
@@ -22,4 +33,4 @@ export function ProjectCardButton() {
             <h3 className="project-card__title">Nouveau projet</h3>
         </button> 
     )
-} 
+}
