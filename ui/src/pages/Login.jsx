@@ -2,6 +2,7 @@ import arrow from '../assets/images/arrow.svg'
 import { useState, useContext } from 'react'
 import useGetJWT from '../hooks/useGetJWT'
 import MessageBox from '../components/MessageBox'
+import Input from '../components/Input'
 import {userContext} from "../contexts/UserContext";
 
 export default function Login() {
@@ -31,14 +32,12 @@ export default function Login() {
                 <form action="" className="register__form" onSubmit={handleSubmit}>
                     {message ? <MessageBox message={message} setMessage={setMessage} /> : null}
                     <h1 className="register__title">Login</h1>
-                    <div className="register__input">
-                        <input type="mail" id="register-mail" onChange={e => setEmail(e.target.value)} />
-                        <label htmlFor="register-mail">Email</label>
-                    </div>
-                    <div className="register__input">
-                        <input type="password" id="register-password" placeholder="" onChange={e => setPassword(e.target.value)} />
-                        <label htmlFor="register-password">Mot de passe</label>
-                    </div>
+                    <Input type="mail" setValue={setEmail} value={email}>
+                        Email
+                    </Input>
+                    <Input type="password" setValue={setPassword} value={password}>
+                        Mot de passe
+                    </Input>
                     <button className="btn" type="submit">Login</button>
                     <p className="register__redirect">Pas encore de compte ? <a href="/signup">Signup</a></p>
                 </form>
