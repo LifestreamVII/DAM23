@@ -3,7 +3,8 @@ import { Link, useLocation } from "react-router-dom"
 
 export default function PopUp({ children }) {
 
-    const { state: { from } } = useLocation();
+    const previousLocation = useLocation().state?.from
+    const from = previousLocation || '/admin'
     
     return (
         <div className={`pop-up`}>

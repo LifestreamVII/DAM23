@@ -3,6 +3,7 @@ import { useState } from 'react'
 import useCreateUser from '../hooks/useCreateUser'
 import MessageBox from '../components/MessageBox'
 import Input from '../components/Input'
+import { Link } from 'react-router-dom'
 
 export default function Signup() {
 
@@ -23,9 +24,9 @@ export default function Signup() {
     return (
         <div className="register register--signup">
             <section className="register__content">
-                <a href="/" className="register__arrow">
+                <Link to="/" className="register__arrow">
                     <img src={arrow} alt="" />
-                </a>
+                </Link>
                 <form action="" className="register__form" onSubmit={handleSubmit}>
                     {message ? <MessageBox message={message} setMessage={setMessage} /> : null}
                     <h1 className="register__title">Signup</h1>
@@ -39,7 +40,7 @@ export default function Signup() {
                         Mot de passe
                     </Input>
                     <button className="btn" type="submit">Signup</button>
-                    <p className="register__redirect">Déjà un compte ? <a href="/login">Login</a></p>
+                    <p className="register__redirect">Déjà un compte ? <Link to="/login">Login</Link></p>
                 </form>
             </section>
             <div className="register__background">

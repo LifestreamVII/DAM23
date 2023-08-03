@@ -23,7 +23,7 @@ export default function Router() {
                 <Route path="/browse" element={<DefaultContainer><Browse /></DefaultContainer>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/cours/:id" element={<DefaultContainer><Course /></DefaultContainer>} />
+                <Route path="/course/:id" element={<DefaultContainer><Course /></DefaultContainer>} />
                 <Route path="/admin/projects" element={<BackOfficeContainer><Projects /></BackOfficeContainer>} />
                 <Route path="/admin/projects/:id" element={<BackOfficeContainer><Project /></BackOfficeContainer>} />
                 <Route path="/admin/projects/new" element={<BackOfficeContainer><NewProject /></BackOfficeContainer>} />

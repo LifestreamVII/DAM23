@@ -4,6 +4,7 @@ import useGetJWT from '../hooks/useGetJWT'
 import MessageBox from '../components/MessageBox'
 import Input from '../components/Input'
 import {userContext} from "../contexts/UserContext";
+import { Link } from 'react-router-dom'
 
 export default function Login() {
 
@@ -26,9 +27,9 @@ export default function Login() {
     return (
         <div className="register">
             <section className="register__content">
-                <a href="/" className="register__arrow">
+                <Link to="/" className="register__arrow">
                     <img src={arrow} alt="" />
-                </a>
+                </Link>
                 <form action="" className="register__form" onSubmit={handleSubmit}>
                     {message ? <MessageBox message={message} setMessage={setMessage} /> : null}
                     <h1 className="register__title">Login</h1>
@@ -39,7 +40,7 @@ export default function Login() {
                         Mot de passe
                     </Input>
                     <button className="btn" type="submit">Login</button>
-                    <p className="register__redirect">Pas encore de compte ? <a href="/signup">Signup</a></p>
+                    <p className="register__redirect">Pas encore de compte ? <Link to="/signup">Signup</Link></p>
                 </form>
             </section>
             <div className="register__background">
