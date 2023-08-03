@@ -4,10 +4,10 @@ import { Link, useLocation } from "react-router-dom"
 export default function ProjectCard({ title, description, completion, id }) {
 
     const truncatedDescription = description.length > 100 ? description.substring(0, 100) + "..." : description
-    const { pathname } = useLocation()
+    const location = '/admin/projects'
 
     return (
-        <Link to={`/admin/projects/${id}`} state={{ from: pathname }} className="project-card">
+        <Link to={`/admin/projects/${id}`} state={{ from: location }} className="project-card">
             <span className="project-card__completion">{completion}</span>
             <h3 className="project-card__title">{title}</h3>
             <p className="project-card__description">{truncatedDescription}</p>
@@ -15,12 +15,12 @@ export default function ProjectCard({ title, description, completion, id }) {
     )
 }
 
-export function ProjectCardButton() {
+export function NewProjectCard() {
 
-    const { pathname } = useLocation()
+    const location = '/admin/projects'
 
     return (
-        <Link to="/admin/projects/new" state={{ from: pathname }} className="project-card project-card--btn">
+        <Link to="/admin/projects/new" state={{ from: location }}  className="project-card project-card--btn">
             <img className="project-card__plus" src={plus} alt="" />
             <h3 className="project-card__title">Nouveau projet</h3>
         </Link>

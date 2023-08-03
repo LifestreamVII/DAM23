@@ -2,11 +2,11 @@
     width: 100%;
     position: relative;
 
-    input {
+    input, textarea {
         width: 100%;
 
         padding: 1rem;
-        margin-bottom: 40px;
+        margin: 2.5rem 0;
 
         display: block;
         background-color: $grey-1;
@@ -17,14 +17,18 @@
         box-sizing: border-box;
     }
 
+    textarea {
+        resize: none;
+        height: 7rem;
+    }
+
     label {
         position: absolute;
-        top: 50%;
+        top: 1.2rem;
         left: 1rem;
 
         font-size: 0.875rem;
 
-        transform: translateY(-50%);
         transition: transform .2s ease-out, top .2s ease-out, left .2s ease-out;
     }
 
