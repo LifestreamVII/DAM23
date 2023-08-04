@@ -4,6 +4,8 @@ import PopUp from "../../components/back-office/PopUp";
 import Input from "../../components/Input";
 import { useParams } from 'react-router-dom';
 import { useState } from "react";
+import useFetchUrl from "../../hooks/useFetchUrl";
+import MessageBox from "../../components/MessageBox";
 
 export default function Projects({children}) {
 
@@ -50,13 +52,34 @@ export function NewProject() {
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const [message, setMessage] = useState(false)
+
+    const fetchUrl = useFetchUrl()
+
+    function createProject(e) {
+        e.preventDefault()
+        fetchUrl(
+            'http://localhost:3000/projects/new',
+            'POST',
+            {
+                'Content-type': 'application/x-www-form-urlencoded'
+            },
+            {
+                title: title,
+                description: description
+            }
+        ).then(response => {
+            setMessage(response.message)
+        })
+    } 
 
     return (
         <Projects>
             <PopUp>
                 <div className="project">
                     <h2 className="project__title">Nouveau projet</h2>
-                    <form action="" className="project__form">
+                    <form action="" className="project__form" onSubmit={createProject}>
+                        {message ? <MessageBox message={message} setMessage={setMessage} /> : null}
                         <Input type="text" setValue={setTitle} value={title}>
                             Titre
                         </Input>
