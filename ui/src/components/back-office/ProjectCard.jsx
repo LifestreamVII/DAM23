@@ -20,7 +20,7 @@ export function NewProjectCard() {
     const location = '/admin/projects'
 
     return (
-        <Link to="/admin/projects/new" state={{ from: location }}  className="project-card project-card--btn">
+        <Link to="/admin/projects/new" state={{ from: location }}  className="project-card project-card--new">
             <img className="project-card__plus" src={plus} alt="" />
             <h3 className="project-card__title">Nouveau projet</h3>
         </Link>

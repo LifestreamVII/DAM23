@@ -63,6 +63,7 @@ export function NewProject() {
                         <Input type="textarea" setValue={setDescription} value={description}>
                             Description
                         </Input>
+                        <button className="btn" type="submit">Créer le projet</button>
                     </form>
                 </div>
             </PopUp>

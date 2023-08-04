@@ -28,16 +28,22 @@ p {
 }
 
 .btn {
-    padding: 0.625rem 2rem;
+    padding: 0.500rem 1.250rem;
 
-    font-size: 1.125em;
-    font-weight: 500;
-    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $primary-color-08;
     text-transform: capitalize;
 
-    border: none;
-    border-radius: 8px;
-    background-color: $primary-color-08;
+    border: 2px $primary-color-08 solid;
+    border-radius: 4px;
 
     cursor: pointer;
+
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+
+    &:hover {
+        background-color: $primary-color-08;
+        color: #fff;
+    }
 }
