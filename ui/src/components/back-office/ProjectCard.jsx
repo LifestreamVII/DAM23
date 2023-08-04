@@ -7,7 +7,7 @@ export default function ProjectCard({ title, description, completion, id }) {
     const location = '/admin/projects'
 
     return (
-        <Link to={`/admin/projects/${id}`} state={{ from: location }} className="project-card">
+        <Link to={`/admin/projects/${id}/programmation`} state={{ from: location }} className="project-card">
             <span className="project-card__completion">{completion}</span>
             <h3 className="project-card__title">{title}</h3>
             <p className="project-card__description">{truncatedDescription}</p>

@@ -19,13 +19,24 @@
         position: absolute;
         top: 0;
         left: 0;
+        
+        transition: background-color .3s ease-out;
+    }
 
-        background-color: rgba(0, 0, 0, 0.5);
+    &--animate {
+        &::before {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .pop-up__content {
+            transform: none;
+            opacity: 1;
+        }
     }
 }
 
 .pop-up__content {
-    width: 70%;
+    width: 650px;
     aspect-ratio: 5/3;
 
     padding: 50px;
@@ -34,11 +45,25 @@
     z-index: 2;
     
     background-color: #fff;
+
+    transition-delay: .1s;
+    transition: transform .1s ease-out, opacity .1s ease-out;
+    opacity: 0;
+    transform: translateY(10%);
 }
 
 .pop-up__cross {
-    width: 25px;
+    width: 20px;
+
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 20px;
+    right: 20px;
+
+    opacity: .3;
+    cursor: pointer;
+    transition: opacity .2s ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
 }

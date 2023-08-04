@@ -41,6 +41,7 @@ export function Project() {
                 <div className="project">
                     <p className="project__completion">en cours</p>
                     <h2 className="project__title">Masterclasse de Miriam Fried</h2>
+                    <p className="project__description">Cras ornare consequat mattis. Aenean rhoncus enim ultrices, pulvinar lectus eleifend, ultricies felis. Sed finibus nisl vel lorem eleifend, nec convallis ipsum aliquet. Praesent vitae est nunc. Donec sed luctus dui. Nulla bibendum mollis lectus. Quisque lobortis id augue a eleifend. Duis dapibus luctus gravida. Proin at commodo eros. Etiam in condimentum massa.</p>
                     <Process />
                 </div>
             </PopUp>
@@ -71,7 +72,7 @@ export function NewProject() {
         ).then(response => {
             setMessage(response.message)
         })
-    } 
+    }
 
     return (
         <Projects>

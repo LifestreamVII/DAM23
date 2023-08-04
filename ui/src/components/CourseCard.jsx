@@ -9,7 +9,7 @@ export default function CourseCard({course}) {
     const descrition = `${truncateString(course.description, 80)}...`
 
     return (
-        <Link to={`/cours/${course.id}`} className="course-card">
+        <Link to={`/course/${course.id}`} className="course-card">
             <div className="course-card__preview"></div>
             <div className="course-card__content">
                 <div className="course-card__properties">
