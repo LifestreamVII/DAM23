@@ -13,7 +13,6 @@ export default function PopUp({ children }) {
         setIsMounted(true)
     }, [])
 
-
     return (
         <div className={`pop-up ${isMounted ? 'pop-up--animate' : ''}`}>
             <div className="pop-up__content">

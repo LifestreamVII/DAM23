@@ -67,3 +67,39 @@
         opacity: 1;
     }
 }
+
+.pop-up__title {
+    margin: 1.5rem 0 .5rem 0;
+
+    display: block;
+
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.pop-up__text {
+    font-size: .875rem;
+}
+
+.pop-up__subtitle {
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $secondary-color-06;
+}
+
+.pop-up__form {
+    max-width: 550px;
+}
+
+.pop-up__file {
+    
+    padding: 1rem;
+    margin: 1.5rem 0 1rem;
+
+    display: inline-block;
+    background-color: $grey-1;
+
+    border: none;
+
+    box-sizing: border-box;
+}

@@ -1,12 +1,33 @@
-import ProjectCard, { NewProjectCard } from "../../components/back-office/ProjectCard"
 import {ProjectsList} from "./Projects"
+import { TasksList } from "./Tasks"
+import { MediasList } from "./Medias"
+import { Link } from "react-router-dom"
 
 export default function DashBoard() {
     return (
         <div className="dashboard">
-            <h3 className="dashboard__title">Projets</h3>
+            <Link to="/admin/projects" className="back-office__subtitle">
+                Projets
+            </Link>
             <ProjectsList />
-            <h3 className="dashboard__title">Médias</h3>
+            <section className="back-office__columns">
+                <div className="back-office__column">
+                    <Link to="/admin/tasks" className="back-office__subtitle">
+                        Tâches
+                    </Link>
+                    <TasksList />
+                </div>
+                <div className="back-office__column">
+                    <Link to="/admin/medias" className="back-office__subtitle">
+                        Médias
+                    </Link>
+                    <MediasList />
+                </div>
+            </section>
+            <Link to="/admin/projects" className="back-office__subtitle">
+                Projets
+            </Link>
+            <ProjectsList />
         </div>
     )
 }
