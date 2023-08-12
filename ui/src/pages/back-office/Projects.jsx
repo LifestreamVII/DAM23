@@ -1,8 +1,8 @@
 import {ProjectCard, NewItemCard} from "../../components/back-office/ItemCard"
-import Process from "../../components/back-office/Process";
+import Process, {GetStepsNavigation} from "../../components/back-office/Process";
 import PopUp from "../../components/back-office/PopUp";
 import Input from "../../components/Input";
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState } from "react";
 import useFetchUrl from "../../hooks/useFetchUrl";
 import MessageBox from "../../components/MessageBox";
@@ -35,6 +35,8 @@ export function Project() {
 
     const { id } = useParams()
 
+    const {previous, next, isFirst, isLast} = GetStepsNavigation()
+
     return (
         <Projects>
             <PopUp>
@@ -43,6 +45,10 @@ export function Project() {
                     <h2 className="pop-up__title">Masterclasse de Miriam Fried</h2>
                     <p className="pop-up__text">Cras ornare consequat mattis. Aenean rhoncus enim ultrices, pulvinar lectus eleifend, ultricies felis. Sed finibus nisl vel lorem eleifend, nec convallis ipsum aliquet. Praesent vitae est nunc. Donec sed luctus dui. Nulla bibendum mollis lectus. Quisque lobortis id augue a eleifend. Duis dapibus luctus gravida. Proin at commodo eros. Etiam in condimentum massa.</p>
                     <Process />
+                </div>
+                <div className="pop-up__buttons">
+                    <Link to={`/admin/projects/${id}/${previous}`} className={`btn btn--secondary ${isFirst ? 'btn--disabled' : "" }`}>Previous</Link>
+                    <Link to={`/admin/projects/${id}/${next}`} className={`btn btn--full ${isLast ? 'btn--disabled' : "" }`}>Next</Link>
                 </div>
             </PopUp>
         </Projects>
@@ -87,7 +93,7 @@ export function NewProject() {
                         <Input type="textarea" setValue={setDescription} value={description}>
                             Description
                         </Input>
-                        <button className="btn" type="submit">Créer le projet</button>
+                        <button className="btn btn--primary" type="submit">Créer le projet</button>
                     </form>
                 </div>
             </PopUp>

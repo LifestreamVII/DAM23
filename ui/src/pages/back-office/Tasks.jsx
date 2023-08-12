@@ -85,7 +85,7 @@ export function NewTask() {
                         <Input type="file" setValue={setFile} value={file}>
                             File
                         </Input>
-                        <button className="btn" type="submit">Créer la tâche</button>
+                        <button className="btn btn--primary" type="submit">Créer la tâche</button>
                     </form>
                 </div>
             </PopUp>

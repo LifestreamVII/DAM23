@@ -1,16 +1,36 @@
 import { Link, useParams } from "react-router-dom"
 
+const steps = [
+	"programmation",
+	"captation",
+	"post-production",
+	"editorial",
+	"publication"
+]
+
+export function GetStepsNavigation() {
+
+	const { step } = useParams()
+
+	const currentStep = steps.indexOf(step)
+	const previousStep = currentStep < 1 ? currentStep : steps[currentStep - 1]
+	const nextStep = currentStep > steps.length - 2 ? "" : steps[currentStep + 1]
+	const isFirst = currentStep < 1
+	const isLast= currentStep > steps.length - 2
+
+	return (
+		{
+			previous: previousStep,
+			next: nextStep,
+			isFirst,
+			isLast
+		}
+	)
+}
+
 export default function Process() {
 
-    const { step } = useParams()
-
-	const steps = [
-		"programmation",
-		"captation",
-		"post-production",
-		"editorial",
-		"publication"
-	]
+	const { step } = useParams()
 
 	return (
 		<div className="process">

@@ -39,7 +39,7 @@ export default function Course() {
             </div>
             <section>
                 <p className="course__description">{course.description}</p>
-                <a href={`/course/${id}/sheet`} download className="btn course__btn">Télécharger la partition</a>
+                <a href={`/course/${id}/sheet`} download className="btn btn--primary course__btn">Télécharger la partition</a>
             </section>
         </div>
     )

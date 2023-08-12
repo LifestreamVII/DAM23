@@ -39,7 +39,7 @@ export default function Login() {
                     <Input type="password" setValue={setPassword} value={password}>
                         Mot de passe
                     </Input>
-                    <button className="btn" type="submit">Login</button>
+                    <button className="btn btn--secondary" type="submit">Login</button>
                     <p className="register__redirect">Pas encore de compte ? <Link to="/signup">Signup</Link></p>
                 </form>
             </section>

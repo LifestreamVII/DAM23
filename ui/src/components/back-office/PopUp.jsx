@@ -16,8 +16,8 @@ export default function PopUp({ children }) {
     return (
         <div className={`pop-up ${isMounted ? 'pop-up--animate' : ''}`}>
             <div className="pop-up__content">
-                <Link to={from}>
-                    <img className="pop-up__cross" src={cross} alt="" />
+                <Link to={from} className="pop-up__cross">
+                    <img src={cross} alt="" />
                 </Link>
                 {children}
             </div>
