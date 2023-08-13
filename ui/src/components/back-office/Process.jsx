@@ -23,7 +23,8 @@ export function GetStepsNavigation() {
 			previous: previousStep,
 			next: nextStep,
 			isFirst,
-			isLast
+			isLast,
+			current: step
 		}
 	)
 }

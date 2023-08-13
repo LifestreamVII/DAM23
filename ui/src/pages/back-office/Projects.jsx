@@ -5,7 +5,8 @@ import Input from "../../components/Input";
 import { useParams, Link } from 'react-router-dom';
 import { useState } from "react";
 import useFetchUrl from "../../hooks/useFetchUrl";
-import MessageBox from "../../components/MessageBox";
+import { useContext } from 'react'
+import { messageBoxContext } from '../../contexts/MessageBoxContext'
 
 export default function Projects({children}) {
 
@@ -35,7 +36,7 @@ export function Project() {
 
     const { id } = useParams()
 
-    const {previous, next, isFirst, isLast} = GetStepsNavigation()
+    const {previous, next, isFirst, isLast, current } = GetStepsNavigation()
 
     return (
         <Projects>
@@ -45,10 +46,11 @@ export function Project() {
                     <h2 className="pop-up__title">Masterclasse de Miriam Fried</h2>
                     <p className="pop-up__text">Cras ornare consequat mattis. Aenean rhoncus enim ultrices, pulvinar lectus eleifend, ultricies felis. Sed finibus nisl vel lorem eleifend, nec convallis ipsum aliquet. Praesent vitae est nunc. Donec sed luctus dui. Nulla bibendum mollis lectus. Quisque lobortis id augue a eleifend. Duis dapibus luctus gravida. Proin at commodo eros. Etiam in condimentum massa.</p>
                     <Process />
+                    <a className="pop-up__file pop-up__text" href="file" download><strong>DOWNLOAD</strong> - [File name]</a>
                 </div>
                 <div className="pop-up__buttons">
-                    <Link to={`/admin/projects/${id}/${previous}`} className={`btn btn--secondary ${isFirst ? 'btn--disabled' : "" }`}>Previous</Link>
-                    <Link to={`/admin/projects/${id}/${next}`} className={`btn btn--full ${isLast ? 'btn--disabled' : "" }`}>Next</Link>
+                    <Link to={`/admin/projects/${id}/${previous}`} className={`btn btn--secondary ${isFirst ? 'btn--disabled' : "" }`}>Précedent</Link>
+                    <Link to={`/admin/projects/${id}/${current}/task`} state={{ from: "/admin/projects/" }} className={`btn btn--full ${isLast ? 'btn--disabled' : "" }`}>Ajouter un fichier</Link>
                 </div>
             </PopUp>
         </Projects>
@@ -59,7 +61,7 @@ export function NewProject() {
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const [message, setMessage] = useState(false)
+    const [message, setMessage] = useContext(messageBoxContext);
 
     const fetchUrl = useFetchUrl()
 
@@ -86,7 +88,6 @@ export function NewProject() {
                 <div className="pop-up__element">
                     <h2 className="pop-up__title">Nouveau projet</h2>
                     <form action="" className="pop-up__form" onSubmit={createProject}>
-                        {message ? <MessageBox message={message} setMessage={setMessage} /> : null}
                         <Input type="text" setValue={setTitle} value={title}>
                             Titre
                         </Input>

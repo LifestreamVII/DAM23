@@ -1,18 +1,18 @@
 import arrow from '../assets/images/arrow.svg'
 import { useState, useContext } from 'react'
 import useGetJWT from '../hooks/useGetJWT'
-import MessageBox from '../components/MessageBox'
 import Input from '../components/Input'
 import {userContext} from "../contexts/UserContext";
+import { messageBoxContext } from '../contexts/MessageBoxContext'
 import { Link } from 'react-router-dom'
 
 export default function Login() {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [message, setMessage] = useState(false)
     const [loggedUser, setLoggedUser] = useContext(userContext);
-    
+    const [message, setMessage] = useContext(messageBoxContext);
+
     const getJWT = useGetJWT
 
     function handleSubmit(e) {
@@ -31,7 +31,6 @@ export default function Login() {
                     <img src={arrow} alt="" />
                 </Link>
                 <form action="" className="register__form" onSubmit={handleSubmit}>
-                    {message ? <MessageBox message={message} setMessage={setMessage} /> : null}
                     <h1 className="register__title">Login</h1>
                     <Input type="mail" setValue={setEmail} value={email}>
                         Email

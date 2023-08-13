@@ -1,16 +1,17 @@
 import arrow from '../assets/images/arrow.svg'
 import { useState } from 'react'
 import useCreateUser from '../hooks/useCreateUser'
-import MessageBox from '../components/MessageBox'
 import Input from '../components/Input'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { messageBoxContext } from '../contexts/MessageBoxContext'
 
 export default function Signup() {
 
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [message, setMessage] = useState(false)
+    const [message, setMessage] = useContext(messageBoxContext);
     
     const createUser = useCreateUser
 
@@ -28,7 +29,6 @@ export default function Signup() {
                     <img src={arrow} alt="" />
                 </Link>
                 <form action="" className="register__form" onSubmit={handleSubmit}>
-                    {message ? <MessageBox message={message} setMessage={setMessage} /> : null}
                     <h1 className="register__title">Signup</h1>
                     <Input type="text" setValue={setUsername} value={username}>
                         Nom d'utilisateur
