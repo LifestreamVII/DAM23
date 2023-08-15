@@ -68,7 +68,7 @@ export function NewProject() {
     function createProject(e) {
         e.preventDefault()
         fetchUrl(
-            'http://localhost:3000/projects/new',
+            'http://localhost:90/projects/new',
             'POST',
             {
                 'Content-type': 'application/x-www-form-urlencoded'

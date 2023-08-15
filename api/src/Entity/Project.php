@@ -35,6 +35,9 @@ class Project
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'projects')]
     private Collection $users;
 
+    #[ORM\ManyToMany(targetEntity: Step::class, inversedBy: 'projects')]
+    private Collection $steps;
+
     public function __construct()
     {
         $this->assets = new ArrayCollection();
@@ -133,6 +136,30 @@ class Project
     public function removeTask(Task $task): static
     {
         $this->tasks->removeElement($task);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Step>
+     */
+    public function getSteps(): Collection
+    {
+        return $this->steps;
+    }
+
+    public function addStep(Step $step): static
+    {
+        if (!$this->steps->contains($step)) {
+            $this->steps->add($step);
+        }
+
+        return $this;
+    }
+
+    public function removeStep(Step $step): static
+    {
+        $this->steps->removeElement($step);
 
         return $this;
     }

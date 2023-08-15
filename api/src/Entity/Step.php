@@ -19,6 +19,9 @@ class Step
     #[ORM\Column(length: 255)]
     private ?string $file = null;
 
+    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'steps')]
+    private Collection $projects;
+    
     public function getId(): ?int
     {
         return $this->id;
