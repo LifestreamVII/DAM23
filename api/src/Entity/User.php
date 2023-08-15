@@ -26,6 +26,9 @@ class User
     #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'users')]
     private Collection $projects;
 
+    #[ORM\Column(length: 255)]
+    private ?string $password = null;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
@@ -83,6 +86,18 @@ class User
         if ($this->projects->removeElement($project)) {
             $project->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
 
         return $this;
     }
