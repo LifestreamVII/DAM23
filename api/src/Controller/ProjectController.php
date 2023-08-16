@@ -91,7 +91,6 @@ class ProjectController extends AbstractController
         
         return new JsonResponse([
             'message' => 'Projet créé avec succès !',
-            'id' => $project->getId(),
         ]);
     }
 }

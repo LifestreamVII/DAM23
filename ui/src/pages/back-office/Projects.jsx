@@ -2,10 +2,10 @@ import {ProjectCard, NewItemCard} from "../../components/back-office/ItemCard"
 import Process, {GetStepsNavigation} from "../../components/back-office/Process";
 import PopUp from "../../components/back-office/PopUp";
 import Input from "../../components/Input";
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState, useContext } from "react";
 import useFetchUrl from "../../hooks/useFetchUrl";
-import { useQuery } from 'react-query'
+import { useQuery, useMutation } from 'react-query'
 import Loader from "../../components/Loader";
 import { messageBoxContext } from "../../contexts/MessageBoxContext";
 
@@ -114,34 +114,37 @@ export function NewProject() {
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const [message, setMessage] = useContext(messageBoxContext)
 
     const fetchUrl = useFetchUrl()
-    const navigate = useNavigate()
 
-    function createProject(e) {
-        e.preventDefault()
-        fetchUrl(
+    const mutation = useMutation(payload => {
+        return fetchUrl(
             'http://localhost:90/project/new',
             'POST',
             {
                 'Content-type': 'application/json'
             },
-            {
-                title: title,
-                description: description
-            }
-        ).then(response => {
-            if (response.id)
-                navigate(`/admin/projects/${response.id}/programmation`)
-        })
+            payload
+        )
+    })
+
+    if (mutation.isError) {
+        setMessage(mutation.error.message)
+    }
+
+    if (mutation.isSuccess) {
+        setMessage('Le projet a bien été créé')
     }
 
     return (
         <Projects>
             <PopUp>
+                {mutation.isLoading ? <Loader /> : null}
+                 
                 <div className="pop-up__element">
                     <h2 className="pop-up__title">Nouveau projet</h2>
-                    <form action="" className="pop-up__form" onSubmit={createProject}>
+                    <form action="" className="pop-up__form" onSubmit={(e) => { e.preventDefault(); mutation.mutate({ title: title, description: description }) }}>
                         <Input type="text" setValue={setTitle} value={title}>
                             Titre
                         </Input>
