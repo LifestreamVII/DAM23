@@ -1,0 +1,45 @@
+.not-found {
+    height: calc(100vh - 78px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.not-found__title {
+    margin-bottom: 3rem;
+
+    position: relative;
+
+    font-size: 10rem;
+    font-weight: 500;
+
+    &::before, &::after {
+        z-index: -1;
+        content: "404";
+        position: absolute;
+        opacity: .5;
+    }
+
+    &::before {
+        top: -60px;
+        left: -60px;
+
+        color: $primary-color-06;
+    }
+
+    &::after {
+        bottom: -60px;
+        right: -60px;
+
+        color: $secondary-color-06;
+    }
+}
+
+.not-found__text {
+    margin-bottom: 1rem;
+
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}

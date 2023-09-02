@@ -1,16 +1,18 @@
 import arrow from '../assets/images/arrow.svg'
 import { useState, useContext } from 'react'
 import useGetJWT from '../hooks/useGetJWT'
-import MessageBox from '../components/MessageBox'
+import Input from '../components/Input'
 import {userContext} from "../contexts/UserContext";
+import { messageBoxContext } from '../contexts/MessageBoxContext'
+import { Link } from 'react-router-dom'
 
 export default function Login() {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [message, setMessage] = useState(false)
     const [loggedUser, setLoggedUser] = useContext(userContext);
-    
+    const [message, setMessage] = useContext(messageBoxContext);
+
     const getJWT = useGetJWT
 
     function handleSubmit(e) {
@@ -25,22 +27,19 @@ export default function Login() {
     return (
         <div className="register">
             <section className="register__content">
-                <a href="/" className="register__arrow">
+                <Link to="/" className="register__arrow">
                     <img src={arrow} alt="" />
-                </a>
+                </Link>
                 <form action="" className="register__form" onSubmit={handleSubmit}>
-                    {message ? <MessageBox message={message} setMessage={setMessage} /> : null}
                     <h1 className="register__title">Login</h1>
-                    <div className="register__input">
-                        <input type="mail" id="register-mail" onChange={e => setEmail(e.target.value)} />
-                        <label htmlFor="register-mail">Email</label>
-                    </div>
-                    <div className="register__input">
-                        <input type="password" id="register-password" placeholder="" onChange={e => setPassword(e.target.value)} />
-                        <label htmlFor="register-password">Mot de passe</label>
-                    </div>
-                    <button className="btn" type="submit">Login</button>
-                    <p className="register__redirect">Pas encore de compte ? <a href="/signup">Signup</a></p>
+                    <Input type="mail" setValue={setEmail} value={email}>
+                        Email
+                    </Input>
+                    <Input type="password" setValue={setPassword} value={password}>
+                        Mot de passe
+                    </Input>
+                    <button className="btn btn--secondary" type="submit">Login</button>
+                    <p className="register__redirect">Pas encore de compte ? <Link to="/signup">Signup</Link></p>
                 </form>
             </section>
             <div className="register__background">

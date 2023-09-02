@@ -9,8 +9,18 @@
 @import "./components/navbar";
 @import "./components/chapter-button";
 @import "./components/message-box";
+@import "./components/input";
 
 @import "./pages/browse";
 @import "./pages/course";
 @import "./pages/home";
+@import "./pages/not-found";
 @import "./pages/register";
+
+@import "./components/back-office/side-menu.scss";
+@import "./components/back-office/pop-up.scss";
+@import "./components/back-office/item-card.scss";
+@import "./components/back-office/process.scss";
+
+@import "./pages/back-office/back-office.scss";
+@import "./pages/back-office/projects.scss";

@@ -1,4 +1,4 @@
-import { useEffect, useState} from 'react'
+import { useEffect } from 'react'
 import iconInfo from '../assets/images/icon-info.svg'
 
 export default function MessageBox({message, setMessage}) {
@@ -10,7 +10,7 @@ export default function MessageBox({message, setMessage}) {
     }, [])
 
     return (
-        <div className={`message-box`}>
+        <div className="message-box">
             <img className="message-box__icon" src={iconInfo} alt="" />
             <p className="message-box__text">{message}</p>
         </div>
