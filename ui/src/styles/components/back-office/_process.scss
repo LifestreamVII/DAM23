@@ -1,9 +1,11 @@
 .process {
+    margin-top: 1rem;
+}
+
+.process__steps {
     width: 100%;
     height: 30px;
-
-    margin-top: 1rem;
-
+    
     display: flex;
     gap: 10px;
 }

@@ -34,7 +34,7 @@ export function Media() {
         <Medias>
             <PopUp>
                 <div className="pop-up__element">
-                    <p><span className="pop-up__subtitle">mp4</span> - 54 Mo</p>
+                    <h3><span className="pop-up__subtitle">mp4</span> - 54 Mo</h3>
                     <h2 className="pop-up__title">Masterclasse de Miriam Fried</h2>
                     <a className="pop-up__file pop-up__text" href="file" download><strong>DOWNLOAD</strong> - [File name]</a>
                 </div>

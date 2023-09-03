@@ -23,11 +23,17 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $mail = null;
 
-    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'users')]
-    private Collection $projects;
-
     #[ORM\Column(length: 255)]
     private ?string $password = null;
+    
+    #[ORM\OneToMany(mappedBy: 'taskReceiver', targetEntity: Task::class)]
+    private Collection $tasksReceived;
+
+    #[ORM\OneToMany(mappedBy: 'taskSender', targetEntity: Task::class, fetch: 'EAGER')]
+    private Collection $tasksSent;
+
+    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'users', fetch: 'EAGER')]
+    private Collection $projects;
 
     public function __construct()
     {
@@ -63,6 +69,19 @@ class User
         return $this;
     }
 
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Project>
      */
@@ -86,18 +105,6 @@ class User
         if ($this->projects->removeElement($project)) {
             $project->removeUser($this);
         }
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): static
-    {
-        $this->password = $password;
 
         return $this;
     }

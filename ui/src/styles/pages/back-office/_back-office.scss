@@ -1,5 +1,9 @@
 .back-office {
     display: flex;
+
+    .input {
+        max-width: 550px;
+    }
 }
 
 .back-office__title {
@@ -76,10 +80,6 @@
 .back-office__columns {
     display: flex;
     gap: 20px;
-
-
-    .item-card {
-    }
 }
 
 .back-office__column {

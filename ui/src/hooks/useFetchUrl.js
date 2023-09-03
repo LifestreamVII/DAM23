@@ -21,5 +21,7 @@ export default function useFetchUrl() {
             if (!get) setMessage(data.message) 
             return data
         }
+        setMessage(data.message)
+
     }
 }

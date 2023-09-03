@@ -3,11 +3,9 @@
 namespace App\Entity;
 enum TaskStatus: string
 {
-    case Pending = "PENDING";
-    case Accepted = "ACCEPTED";
-    case Unassigned = "UNASSIGNED";
-    case Started = "STARTED";
-    case Completed = "COMPLETED";
+    case Pending = "EN ATTENTE";
+    case Started = "EN COURS";
+    case Completed = "TERMINÉE";
 }
 
 ?>

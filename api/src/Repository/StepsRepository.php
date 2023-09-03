@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Step;
+use App\Entity\Steps;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Step>
+ * @extends ServiceEntityRepository<Steps>
  *
- * @method Step|null find($id, $lockMode = null, $lockVersion = null)
- * @method Step|null findOneBy(array $criteria, array $orderBy = null)
- * @method Step[]    findAll()
- * @method Step[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Steps|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Steps|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Steps[]    findAll()
+ * @method Steps[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class StepRepository extends ServiceEntityRepository
+class StepsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Step::class);
+        parent::__construct($registry, Steps::class);
     }
 
-    public function save(Step $entity, bool $flush = false): void
+    public function save(Steps $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class StepRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Step $entity, bool $flush = false): void
+    public function remove(Steps $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class StepRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Step[] Returns an array of Step objects
+//     * @return Steps[] Returns an array of Steps objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class StepRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Step
+//    public function findOneBySomeField($value): ?Steps
 //    {
 //        return $this->createQueryBuilder('s')
 //            ->andWhere('s.exampleField = :val')
