@@ -4,15 +4,36 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
+        users:
+            entity:
+                class: App\Entity\User
+                property: username
         users_in_memory: { memory: null }
+    security:
+        enable_authenticator_manager: true
+
+    # Define your encoders and password hashing methods here (if needed)
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+            algorithm: auto
+
+    providers:
+        # Configure your user provider(s) here
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: users_in_memory
-
+            provider: users
+            entry_point: form_login
+            form_login:
+                login_path: app_login
+                check_path: app_login
+            custom_authenticator: App\Security\UserAuthAuthenticator
+            logout:
+                path: app_logout
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -21,9 +42,12 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
-    access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+     access_control:
+        - { path: ^/api/admin, roles: ROLE_ADMIN }
+        - { path: ^/api/profile, roles: ROLE_USER }
+        - { path: ^/api/cours, roles: ROLE_USER }
+        - { path: ^/api/metadata, roles: ROLE_USER }
+        - { path: ^/api/vote, roles: ROLE_USER }
 
 when@test:
     security:
