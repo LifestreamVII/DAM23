@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Dashboard from './Dashboard';
 
-
-// Styles CSS intégrés pour le composant
 const styles = {
   screen:{
     display: 'flex',
@@ -61,18 +59,15 @@ const styles = {
 };
 
 
-// Composant principal du tableau de bord
 function DashboardLogin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Fonction de gestion de la soumission du formulaire de connexion
   function handleSubmit(event) {
     event.preventDefault();
 
-    // Vérification basique de l'identifiant et du mot de passe
     if (username === 'admin'|| username === 'CDP'|| username === 'traducteur'&& password === 'password'){
       setIsLoggedIn(true);
       setError('');}
@@ -82,7 +77,6 @@ function DashboardLogin() {
     }
   };
 
-  // Fonction de déconnexion
     function handleLogout() {
     setIsLoggedIn(false);
     setUsername('');
