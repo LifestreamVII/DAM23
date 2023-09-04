@@ -1,29 +1,27 @@
-export default async function useFetchUrl(url, method, headers, body, success, error) {
+import { messageBoxContext } from '../contexts/MessageBoxContext'
+import { useContext } from 'react'
 
-    const successMessage = success || 'Requête effectuée avec succès'
-    const errorMessage = error || 'Une erreur est survenue, réessayez plus tard'
+export default function useFetchUrl() {
 
-    const payload = {
-        method: method,
-        headers: new Headers(headers),
-        body: new URLSearchParams(body)
-    }
+    const [message, setMessage] = useContext(messageBoxContext)
 
-    const response = await fetch(url, payload)
-    .then((response) => {
-        if (response.ok)
-            return {
-                message: successMessage,
-                data: response.json()
-            }
-        throw new Error()
-    })
-    .catch((error) => {
-        return { 
-            message: errorMessage,
-            data: error
+    return async function (url, method, headers, body) {
+
+        const get = method === 'GET'
+
+        const payload = {
+            method: method,
+            headers: new Headers(headers),
+            body: body ? JSON.stringify(body) : undefined
         }
-    })
 
-    return await response
+        const response = await fetch(url, payload)
+        const data = await response.json()
+        if (response.ok) {
+            if (!get) setMessage(data.message) 
+            return data
+        }
+        setMessage(data.message)
+
+    }
 }

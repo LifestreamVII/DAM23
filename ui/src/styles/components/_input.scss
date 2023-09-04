@@ -1,12 +1,13 @@
 .input {
     width: 100%;
+    margin: 2.5rem 0;
+
     position: relative;
 
-    input, textarea {
+    input, textarea, select, .input__item {
         width: 100%;
 
         padding: 1rem;
-        margin: 2.5rem 0;
 
         display: block;
         background-color: $grey-1;
@@ -41,3 +42,60 @@
         }
     }
 }
+
+.input--select {
+
+    .label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        border-radius: 4px 4px 0 0;
+    }
+    
+    .label__arrow {
+        transform: rotate(-90deg);
+        height: 10px;
+    }
+    
+    .options {
+        width: 100%;
+        min-height: calc((2rem + 1.3rem));
+        max-height: calc((2rem + 1.3rem) * 2.5);
+
+        background-color: $grey-1;
+        border-radius: 0 0 4px 4px;
+
+        overflow-y: scroll;
+        
+        transition: height .2s ease-out, transform .2s ease-out, opacity .1s ease-out, min-height .2s ease-out, max-height .2s ease-out;
+    }
+
+    .option {
+        margin: 0;
+        text-align: left;
+        transition: color .2s ease-out;
+        border-radius: 0;
+
+        &:hover {
+            background-color: $grey-2;
+        }
+
+        &--selected {
+            font-weight: 600;
+            color: $primary-color-06;
+        }
+    }
+}
+
+.input--closed {
+
+    .label__arrow {
+        transform: rotate(90deg);
+    }
+
+    .options {
+        min-height: 0;
+        max-height: 0;
+    }
+} 

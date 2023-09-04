@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import arrowGrey from '../assets/images/arrow-grey.svg'
 
 export default function Filter(props) {

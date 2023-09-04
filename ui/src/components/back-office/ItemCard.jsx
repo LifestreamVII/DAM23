@@ -14,12 +14,12 @@ export function ProjectCard({ id, completion, title, description }) {
     )
 }
 
-export function TaskCard({ id, status, date, description, user }) {
+export function TaskCard({ id, status, date, title, description }) {
         
         return (
             <Link to={`/admin/tasks/${id}`} state={{ from: `/admin/tasks` }} className="item-card">
                 <p className="item-card__subtitle"><span>{status}</span> - {date}</p>
-                <p className="item-card__text item-card__text--strong">{user}</p>
+                <p className="item-card__title">{title}</p>
                 <p className="item-card__text">{description}</p>
             </Link>
         )
