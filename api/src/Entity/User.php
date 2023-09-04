@@ -27,7 +27,13 @@ class User implements PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $password = null;
     
-    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'users')]
+    #[ORM\OneToMany(mappedBy: 'taskReceiver', targetEntity: Task::class)]
+    private Collection $tasksReceived;
+
+    #[ORM\OneToMany(mappedBy: 'taskSender', targetEntity: Task::class, fetch: 'EAGER')]
+    private Collection $tasksSent;
+
+    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'users', fetch: 'EAGER')]
     private Collection $projects;
 
     public function __construct()
@@ -72,6 +78,8 @@ class User implements PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
+        return $this;
     }
 
     /**

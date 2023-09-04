@@ -28,16 +28,56 @@ p {
 }
 
 .btn {
-    padding: 0.625rem 2rem;
+    padding: 0.500rem 1.250rem;
 
-    font-size: 1.125em;
+    display: block;
+
+    font-size: 0.875rem;
     font-weight: 500;
-    color: #fff;
-    text-transform: capitalize;
+    line-height: 1.4;
 
-    border: none;
-    border-radius: 8px;
-    background-color: $primary-color-08;
+    border: 2px solid;
+    border-radius: 4px;
 
     cursor: pointer;
+
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+
+    &--full {
+        color: #fff;
+        border-color: $primary-color-07;
+        background-color: $primary-color-07;
+
+        &:hover {
+            border-color: $primary-color-09;
+            background-color: $primary-color-09;
+        }
+    }
+
+    &--primary {
+        color: $primary-color-08;
+        border-color: $primary-color-08;
+
+        &:hover {
+            background-color: $primary-color-08;
+            color: #fff;
+        }
+    }
+
+    &--secondary {
+        color: $secondary-color-05;
+        border-color: $secondary-color-05;
+
+        &:hover {
+            background-color: $secondary-color-05;
+            color: #fff;
+        }
+    }
+
+    &--disabled, &--disabled:hover {
+        color: $grey-2;
+        border-color: $grey-2;
+        background-color: transparent;
+        pointer-events: none;
+    }
 }

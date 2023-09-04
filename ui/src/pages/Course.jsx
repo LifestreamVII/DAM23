@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import video from "../assets/videos/plein-air-min.mp4"
 import { useState } from "react"
 import ChapterButton from "../components/ChapterButton"
@@ -39,7 +39,7 @@ export default function Course() {
             </div>
             <section>
                 <p className="course__description">{course.description}</p>
-                <a href="" download className="btn course__btn">Télécharger la partition</a>
+                <a href={`/course/${id}/sheet`} download className="btn btn--primary course__btn">Télécharger la partition</a>
             </section>
         </div>
     )

@@ -7,6 +7,10 @@ use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Step;
+use App\Entity\ProjectStep;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 #[ApiResource]
@@ -29,17 +33,34 @@ class Project
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: Asset::class)]
     private Collection $assets;
 
-    #[ORM\ManyToMany(targetEntity: Task::class, inversedBy: 'projects')]
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Task::class)]
     private Collection $tasks;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'projects')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'projects', fetch: 'EAGER')]
     private Collection $users;
+
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectStep::class, orphanRemoval: true, cascade: ['persist'])]
+    private Collection $step;
+
+    #[ORM\Column(type: "string", enumType: Step::class)]
+    private Step $currentStep;
 
     public function __construct()
     {
         $this->assets = new ArrayCollection();
         $this->tasks = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->step = new ArrayCollection();
+        $programmation = new ProjectStep();
+        $captation = new ProjectStep();
+        $postProduction = new ProjectStep();
+        $editorial = new ProjectStep();
+        $publication = new ProjectStep();
+        $this->addStep($programmation->setName(Step::programmation));
+        $this->addStep($captation->setName(Step::captation));
+        $this->addStep($postProduction->setName(Step::postProduction));
+        $this->addStep($editorial->setName(Step::editorial));
+        $this->addStep($publication->setName(Step::publication));
     }
 
     public function getId(): ?int
@@ -104,7 +125,6 @@ class Project
     public function removeAsset(Asset $asset): static
     {
         if ($this->assets->removeElement($asset)) {
-            // set the owning side to null (unless already changed)
             if ($asset->getProject() === $this) {
                 $asset->setProject(null);
             }
@@ -137,12 +157,31 @@ class Project
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+    public function getUsers(EntityManagerInterface $entityManager, $doctrine) : array
     {
-        return $this->users;
+        $conn = $entityManager->getConnection();
+
+        $sql = '
+            SELECT * FROM project_user p
+            WHERE p.project_id = :id
+        ';
+
+        $resultSet = $conn->executeQuery($sql, ['id' => $this->getId()]);
+
+        $usersId = $resultSet->fetchAllAssociative();
+
+        $users = [];
+
+        foreach ($usersId as $userId) {
+            $user = $doctrine->getRepository(User::class)->findOneBy(['id' => $userId['user_id']]);
+            array_push($users, [
+                'id' => $user->getId(),
+                'username' => $user->getUsername(),
+                'mail' => $user->getMail()
+            ]);
+        }
+
+        return $users;
     }
 
     public function addUser(User $user): static
@@ -160,4 +199,47 @@ class Project
 
         return $this;
     }
+
+    public function getCurrentStep(): Step
+    {
+        return $this->currentStep;
+    }
+
+    public function setCurrentStep(Step $currentStep): static
+    {
+        $this->currentStep = $currentStep;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProjectStep>
+     */
+    public function getStep(): Collection
+    {
+        return $this->step;
+    }
+
+    public function addStep(ProjectStep $step): static
+    {
+        if (!$this->step->contains($step)) {
+            $this->step->add($step);
+            $step->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStep(ProjectStep $step): static
+    {
+        if ($this->step->removeElement($step)) {
+            // set the owning side to null (unless already changed)
+            if ($step->getProject() === $this) {
+                $step->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
