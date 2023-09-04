@@ -95,3 +95,4 @@ api/vendor/symfony/http-kernel/HttpKernel.php
 api/vendor/symfony/http-kernel/Kernel.php
 api/vendor/symfony/http-kernel/Log/Logger.php
 api/vendor/symfony/routing/Router.php
+ui/package-lock.json
