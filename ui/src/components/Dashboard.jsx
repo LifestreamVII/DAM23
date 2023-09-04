@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Dashboardfooter from './Dashboardfooter';
 
-// Styles CSS intégrés pour le tableau de bord
+/*
 const styles = {
   container: {
     width: '400px',
@@ -56,7 +56,7 @@ function Dashboard() {
         {selectedItem && (
           <div>
             <h2>Contenu du {selectedItem}</h2>
-            {/* Afficher le contenu en fonction de l'élément sélectionné */}
+            {/* Afficher le contenu en fonction de l'élément sélectionné }
           </div>
         )}
       </div>
@@ -68,3 +68,56 @@ function Dashboard() {
 }
 
 export default Dashboard;
+*/
+import React, { useState } from 'react';
+import FileUploader from './mediadash';
+
+function TabComponent(){
+  const [onglet, setOnglet] = useState(0);
+
+  const handleTabChange = (index) => {
+    setOnglet(index);
+  };
+
+  return (
+    <div>
+        <nav>
+      <ul>
+        <li>
+          <button className={onglet === 0 ? 'active' : ''} onClick={() => handleTabChange(0)}>
+          <h2>Média</h2>
+          </button>
+        </li>
+        <li>
+          <button className={onglet === 1 ? 'active' : ''}
+          onClick={() => handleTabChange(1)}>
+          <h2>
+            Profil
+          </h2>
+          </button>
+        </li>
+        <li>
+          <button className={onglet=== 2 ? 'active' : ''}
+          onClick={() => handleTabChange(2)}>
+          <h2>Historique</h2>
+          </button>
+        </li>
+        <li>
+          <button className={onglet === 3 ? 'active' : ''}
+          onClick={function() {handleTabChange(3); }}>
+            <h2>
+              Projet
+            </h2>
+          </button>
+        </li>
+      </ul>
+      {onglet === 0 && <div><FileUploader/></div>}
+      {onglet === 1 && <div>Contenu de l'onglet 2</div>}
+      {onglet === 2 && <div>Contenu de l'onglet 3</div>}
+      {onglet === 3 && <div>Contenu de l'onglet 4</div>}
+      </nav>
+    </div>
+  );
+};
+
+export default TabComponent;
