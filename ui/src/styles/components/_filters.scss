@@ -1,57 +1,57 @@
-.filters {
-    display: flex;
-    gap: 10px;
+// .filters {
+//     display: flex;
+//     gap: 10px;
 
-    margin-top: 80px;
-}
+//     margin-top: 80px;
+// }
 
-.select {
-    position: relative;
+// .select {
+//     position: relative;
     
-    &--open {
-        .select__options {
-            visibility: visible;
-        }
-    }
-}
+//     &--open {
+//         .select__options {
+//             visibility: visible;
+//         }
+//     }
+// }
 
-.option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+// .option {
+//     display: flex;
+//     align-items: center;
+//     gap: 10px;
 
-    padding: 0.625rem 0.938rem;
+//     padding: 0.625rem 0.938rem;
 
-    font-weight: bold;
-    font-size: 0.750rem;
-    color: $grey-4;
+//     font-weight: bold;
+//     font-size: 0.750rem;
+//     color: $grey-4;
     
-    background-color: $grey-1;
-    border: none;
-    border-radius: 19px;
-}
+//     background-color: $grey-1;
+//     border: none;
+//     border-radius: 19px;
+// }
 
-.option__arrow {
-    transform: rotate(90deg);
-    height: 10px;
-}
+// .option__arrow {
+//     transform: rotate(90deg);
+//     height: 10px;
+// }
 
-.select__options {
-    width: 250px;
+// .select__options {
+//     width: 250px;
 
-    position: absolute;
-    bottom: -20px;
-    transform: translateY(100%);
-    visibility: hidden;
-    left: 0;
+//     position: absolute;
+//     bottom: -20px;
+//     transform: translateY(100%);
+//     visibility: hidden;
+//     left: 0;
 
-    background-color: #fff;
-    border: 1px solid $grey-2;
-}
+//     background-color: #fff;
+//     border: 1px solid $grey-2;
+// }
 
-.select__options .option {
-    width: 100%;
-    background-color: transparent;
+// .select__options .option {
+//     width: 100%;
+//     background-color: transparent;
 
-    gap: 5px;
-}
+//     gap: 5px;
+// }

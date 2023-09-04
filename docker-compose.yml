@@ -6,12 +6,12 @@ services:
     restart: on-failure
     volumes:
       # this will mount the api folder which contains the code to the docker container
-      - ./api:/var/www/api:delegated
+      - ./api:/var/www/api
       # this will mount the nginx logs so that you can check the logs for errors,
       # without logging into the container
-      - ./var/logs/nginx/:/var/log/nginx:delegated
+      - ./var/logs/nginx/:/var/log/nginx
       # this will create the server config to serve the api
-      - ./docker/nginx/api.conf:/etc/nginx/conf.d/api.conf:delegated
+      - ./docker/nginx/api.conf:/etc/nginx/conf.d/api.conf
     ports:
     - "90:80"
     depends_on:
@@ -25,7 +25,7 @@ services:
     restart: on-failure
     volumes:
       # this will mount the api folder which contains the code to the docker container
-      - ./api:/var/www/api:delegated
+      - ./api:/var/www/api
       # this will mount the custom `.ini` to the container
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini:ro
     networks:
@@ -35,18 +35,18 @@ services:
 
   ui:
     build: ./ui
+    environment:
+      - WDS_SOCKET_PORT=0
     restart: on-failure
-    # below line starts the project
-    command: "npm run start"
     depends_on:
       - api
     networks:
       - monitoring
     volumes:
       # this will mount the ui folder which contains the code to the docker container
-      - ./ui:/var/www/ui:delegated
+      - ./ui:/app
       # this will mount the node_modules folder for faster performance
-      - nodemodules:/var/www/ui/node_modules
+      - nodemodules:/app/node_modules
     ports:
       - "3000:3000"
 
@@ -77,7 +77,7 @@ services:
       - monitoring
 
 volumes:
-  nodemodules: {}
+  nodemodules:
   db-data:
   pma-data:
 

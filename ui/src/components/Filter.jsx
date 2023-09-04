@@ -1,21 +1,11 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import arrowGrey from '../assets/images/arrow-grey.svg'
 
 export default function Filter(props) {
 
-    const {id, options, name, openSelectId, handleSetOpenSelectId} = props
+    const {id, name, tags, openSelectId, handleSetOpenSelectId, tagsSelected, handleSetTagsSelected} = props
 
     const filterWrapper = useRef(null)
-    const [currentOptions, setCurrentOptions] = useState([])
-
-    function handleSetCurrentOption(option) {
-        if (currentOptions.includes(option)) {
-            setCurrentOptions((prev) => prev.filter((item) => item !== option))
-            return
-        }
-        console.log(currentOptions)
-        setCurrentOptions((prev) => [...prev, option])
-    }
 
     return (
         <div ref={filterWrapper} className={`select ${openSelectId === id ? 'select--open' : null}`}>
@@ -24,10 +14,10 @@ export default function Filter(props) {
                 <img className="option__arrow" src={arrowGrey} alt="" />
             </button>
             <div className="select__options">
-                {options.map((option, index) =>
-                <button key={index} className="option" onClick={() => handleSetCurrentOption(option)}>
-                    <input type="checkbox" checked={currentOptions.includes(option)} />
-                    <span className="option__name">{option}</span>
+                {tags.map((tag, index) =>
+                <button key={index} className="option" onClick={() => handleSetTagsSelected(name, tag)}>
+                    <input type="checkbox" checked={tagsSelected[name] ? tagsSelected[name].includes(tag) : false} readOnly />
+                    <span className="option__name">{tag}</span>
                 </button>
                 )}
             </div>

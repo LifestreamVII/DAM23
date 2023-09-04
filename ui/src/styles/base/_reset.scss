@@ -18,6 +18,9 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+html, body {
+	height: 100%;
+}
 input, textarea, button {
 	font-family: inherit;
 }

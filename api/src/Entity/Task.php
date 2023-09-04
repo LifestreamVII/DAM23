@@ -24,12 +24,24 @@ class Task
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $completeDate = null;
+    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'tasks')]
+    #[ORM\JoinColumn(name: 'project_id', referencedColumnName: 'id')]
+    private Project $project;
 
-    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'tasks')]
-    private Collection $projects;
-    
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'tasksSent', fetch: 'EAGER')]
+    #[ORM\JoinColumn(name: 'sender_id', referencedColumnName: 'id')]
+    private User $taskSender;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'tasksReceived')]
+    #[ORM\JoinColumn(name: 'receiver_id', referencedColumnName: 'id')]
+    private User $taskReceiver;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $completedAt = null;
+
     #[ORM\Column(type: "string", enumType: TaskStatus::class)]
     private TaskStatus $status;
 
@@ -67,41 +79,74 @@ class Task
         return $this;
     }
 
-    public function getCompleteDate(): ?\DateTimeInterface
+    public function getTaskSender(): User
     {
-        return $this->completeDate;
+        return $this->taskSender;
     }
 
-    public function setCompleteDate(?\DateTimeInterface $completeDate): static
+    public function setTaskSender(User $taskSender): static
     {
-        $this->completeDate = $completeDate;
+        $this->taskSender = $taskSender;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Project>
-     */
-    public function getProjects(): Collection
+    public function getTaskReceiver(): ?User
     {
-        return $this->projects;
+        return $this->taskReceiver;
     }
 
-    public function addProject(Project $project): static
+    public function setTaskReceiver(User $taskReceiver): static
     {
-        if (!$this->projects->contains($project)) {
-            $this->projects->add($project);
-            $project->addTask($this);
-        }
+        $this->taskReceiver = $taskReceiver;
 
         return $this;
     }
 
-    public function removeProject(Project $project): static
+    public function getProject() : Project
     {
-        if ($this->projects->removeElement($project)) {
-            $project->removeTask($this);
-        }
+        return $this->project;
+    }
+
+    public function setProject(Project $project) : static
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): string
+    {
+        return $this->createdAt->format('d.m.Y');
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getCompletedAt(): ?\DateTimeImmutable
+    {
+        return $this->completedAt;
+    }
+
+    public function setCompletedAt(\DateTimeImmutable $completedAt): static
+    {
+        $this->completedAt = $completedAt;
+
+        return $this;
+    }
+
+    public function getStatus(): TaskStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(TaskStatus $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

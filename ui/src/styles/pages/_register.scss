@@ -4,9 +4,9 @@
     display: flex;
     align-items: center;
 
-    &--reverse {
+    &--signup {
         flex-direction: row-reverse;
-    } 
+    }
 }
 
 .register__content {
@@ -46,40 +46,11 @@
 }
 
 .register__title {
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 
     font-size: 3rem;
     font-weight: 500;
     text-transform: capitalize;
-}
-
-.register__input {
-    width: 100%;
-    position: relative;
-
-    input {
-        width: 100%;
-
-        padding: 1rem;
-        margin-bottom: 40px;
-
-        display: block;
-        background-color: $grey-1;
-
-        border: none;
-        border-radius: 8px;
-
-        box-sizing: border-box;
-    }
-
-    label {
-        position: absolute;
-        top: -8px;
-        
-        font-size: 0.875rem;
-
-        transform: translateY(-100%);
-    }
 }
 
 .register__redirect {
