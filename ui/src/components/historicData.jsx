@@ -4,19 +4,20 @@ function HistoricalData() {
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
-    fetch('/api/historical-data')
-      .then((response) => {
+    async function fetchData() {
+      try {
+        const response = await fetch('/api/asset_history');
         if (!response.ok) {
           throw new Error('Erreur de la récupération');
         }
-        return response.json();
-      })
-      .then((data) => {
+        const data = await response.json();
         setFilteredData(data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Erreur de la récupération:', error);
-      });
+      }
+    }
+    
+    fetchData();
   }, []);
 
   return (
@@ -25,7 +26,7 @@ function HistoricalData() {
       <ul>
         {filteredData.map((item) => (
           <li key={item.id}>
-            Nom du fichier : {item.name} | Type de fichier : {item.fileType} | Date de création : {item.creationDate} | Date de mise à jour : {item.updateDate}
+            Id de l'URL : {item.asset_id} | URL du projet: {item.file} | Version : {item.version} | Date : {item.date}
           </li>
         ))}
       </ul>
