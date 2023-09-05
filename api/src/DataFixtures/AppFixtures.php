@@ -17,7 +17,7 @@ class AppFixtures extends Fixture
 
             $user->setUsername($username);
             $user->setMail($email);
-            $userAdmin->setPassword($this->userPasswordHasher->hashPassword($userAdmin, "password"));
+            $user->setPassword($this->userPasswordHasher->hashPassword($userAdmin, "password"));
 
             $manager->persist($user);
         }
