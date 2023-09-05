@@ -39,15 +39,15 @@ class UserRepository extends ServiceEntityRepository
         }
     }
     //Rechercher les utilisateurs associés à un fichier multimédia
-    public function findUsersByMedia(Media $media): array
-    {
-    return $this->createQueryBuilder('u')
-        ->join('u.mediaAccess', 'ma')
-        ->where('ma.media = :media')
-        ->setParameter('media', $media)
-        ->getQuery()
-        ->getResult();
-    }
+    // public function findUsersByMedia(Media $media): array
+    // {
+    // return $this->createQueryBuilder('u')
+    //     ->join('u.mediaAccess', 'ma')
+    //     ->where('ma.media = :media')
+    //     ->setParameter('media', $media)
+    //     ->getQuery()
+    //     ->getResult();
+    // }
 
     // Rechercher les utilisateurs avec des rôles spécifiques
     public function findUsersByRole(string $role): array
