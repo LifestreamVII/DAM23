@@ -11,8 +11,12 @@
     }
 }
 
-.side-menu__link {
+.side-menu__logo {
+    margin: 20px auto;
+    height: 70px;
+}
 
+.side-menu__link {
     display: flex;
     align-items: center;
     gap: 15px;
