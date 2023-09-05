@@ -14,6 +14,9 @@ class UserController extends AbstractController
     public function index(EntityManagerInterface $entityManager): JsonResponse
     {
         $users = $entityManager->getRepository(User::class)->findAll();
+        $projectManagers = $entityManager->getRepository(User::class)->findAll();
+        $translators = $entityManager->getRepository(User::class)->findAll();
+        $administrators = $entityManager->getRepository(User::class)->findAll();
 
         $data = [];
 
@@ -35,6 +38,9 @@ class UserController extends AbstractController
     public function user(EntityManagerInterface $entityManager, int $id): JsonResponse
     {
         $user = $entityManager->getRepository(User::class)->findOneBy(['id' => $id]);
+        $projectManagers = $entityManager->getRepository(User::class)->findOneBy(['id' => $id]);
+        $translators = $entityManager->getRepository(User::class)->findOneBy(['id' => $id]);
+        $administrators = $entityManager->getRepository(User::class)->findOneBy(['id' => $id]);
 
         if (!$user) {
             return new JsonResponse([
