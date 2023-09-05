@@ -38,7 +38,35 @@ class UserRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    //Rechercher les utilisateurs associés à un fichier multimédia
+    public function findUsersByMedia(Media $media): array
+    {
+    return $this->createQueryBuilder('u')
+        ->join('u.mediaAccess', 'ma')
+        ->where('ma.media = :media')
+        ->setParameter('media', $media)
+        ->getQuery()
+        ->getResult();
+    }
 
+    // Rechercher les utilisateurs avec des rôles spécifiques
+    public function findUsersByRole(string $role): array
+    {
+    return $this->createQueryBuilder('u')
+        ->where(':role MEMBER OF u.roles')
+        ->setParameter('role', $role)
+        ->getQuery()
+        ->getResult();
+    }
+    // Rechercher les utilisateurs en fonction de critères spécifiques
+    public function findActiveUsers(\DateTime $since): array
+    {
+    return $this->createQueryBuilder('u')
+        ->where('u.lastActiveAt >= :since')
+        ->setParameter('since', $since)
+        ->getQuery()
+        ->getResult();
+    }
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
