@@ -6,10 +6,6 @@ import { Link } from "react-router-dom"
 export default function DashBoard() {
     return (
         <div className="dashboard">
-            <Link to="/admin/tasks" className="back-office__subtitle">
-                Tâches
-            </Link>
-            <TasksList />
             <Link to="/admin/projects" className="back-office__subtitle">
                 Projets
             </Link>

@@ -1,4 +1,4 @@
-import {MediaCard, NewItemCard} from "../../components/back-office/ItemCard"
+import {MediaCard, NewItem} from "../../components/back-office/ItemCard"
 import PopUp from "../../components/back-office/PopUp"
 import { useParams } from "react-router-dom"
 
@@ -16,7 +16,7 @@ export function MediasList() {
         
     return (
         <section className="back-office__container">
-            <NewItemCard page="medias" text="Nouveau média" />
+            <NewItem page="medias" text="Nouveau média" />
             <MediaCard id="1" name="video-masterclasse.mp4" description="Masterclasse de Miriam Fried" mime="mp4" size="50 Mo" />
             <MediaCard id="2" name="video-masterclasse.mp4" description="Masterclasse de Miriam Fried" mime="mp4" size="50 Mo" />
             <MediaCard id="3" name="video-masterclasse.mp4" description="Masterclasse de Miriam Fried" mime="mp4" size="50 Mo" />
