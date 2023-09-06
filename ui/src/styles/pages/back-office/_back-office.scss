@@ -7,48 +7,22 @@
 }
 
 .back-office__title {
+    max-width: 400px;
+
+    margin-top: 1rem;
     margin-bottom: 4rem;
+
+    padding-left: .7rem;
     
     font-size: 1.750rem;
     font-weight: 600;
+    line-height: 1.4;
 
-    span {
-        position: relative;
-
-        &::after {
-            content: "";
-            
-            width: 90%;
-            height: 5px;
-    
-            position: absolute;
-            left: 0;
-            bottom: -5px;
-            transform: translateY(100%);
-            
-            border-radius: 30px;
-            background-color: $secondary-color-10;
-        }
-    
-        &::before {
-            content: "";
-            
-            height: 5px;
-            aspect-ratio: 1/1;
-    
-            position: absolute;
-            right: 0;
-            bottom: -5px;
-            transform: translateY(100%);
-            
-            border-radius: 100%;
-            background-color: $secondary-color-10;
-        }
-    }
+    border-left: $secondary-color-10 solid 5px;
 }
 
 .back-office__subtitle {
-    margin: 1.5rem 0 1rem;
+    margin: 2.5rem 0 1rem;
 
     display: block;
 
