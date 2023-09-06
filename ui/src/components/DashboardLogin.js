@@ -65,34 +65,43 @@ function DashboardLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    if (username === 'admin'|| username === 'CDP'|| username === 'traducteur'&& password === 'password'){
-      setIsLoggedIn(true);
-      setError('');}
-      else {
-      setIsLoggedIn(false);
-      setError('Identifiant ou mot de passe incorrect');
-    }
-  };
+    try {
+      const response = await fetch('/api/User', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    function handleLogout() {
+      if (response.ok) {
+        setIsLoggedIn(true);
+        setError('');
+      } else {
+        setIsLoggedIn(false);
+        setError('Identifiant ou mot de passe incorrect');
+      }
+    } catch (error) {
+      console.error('Une erreur s\'est produite lors de la requête :', error);
+    }
+  }
+
+  function handleLogout() {
     setIsLoggedIn(false);
     setUsername('');
     setPassword('');
     setError('');
-  };
+  }
 
   if (isLoggedIn) {
     return (
       <div style={styles.container}>
-        <Dashboard/>
+        <Dashboard />
         <button style={styles.button} onClick={handleLogout}>Déconnexion</button>
       </div>
-      //<h1 style={styles.title}>Tableau de bord</h1>
-      //<p>Bienvenue, {username} !</p>
-      
     );
   } else {
     return (
@@ -117,12 +126,13 @@ function DashboardLogin() {
             <button type="submit" style={styles.button}>Se connecter</button>
             {error && <p style={styles.error}>{error}</p>}
           </form>
-          </div>
-          <div style={styles.logo}>
-            <img style={styles.img} src="https://www.accr-europe.org/media/accr/187560-187560-sra.png" alt="Logo"/>
-            </div>
         </div>
-      );
-    }
+        <div style={styles.logo}>
+          <img style={styles.img} src="https://www.accr-europe.org/media/accr/187560-187560-sra.png" alt="Logo" />
+        </div>
+      </div>
+    );
   }
+}
+
 export default DashboardLogin;

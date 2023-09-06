@@ -1,0 +1,1 @@
+2023/09/05 13:42:00 [error] 20#20: *8 upstream timed out (110: Operation timed out) while reading response header from upstream, client: 172.18.0.1, server: api.local.internal, request: "GET /asset/add HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "localhost:90"
