@@ -33,7 +33,7 @@ export function NewItem({to}) {
     const from = useLocation().pathname
 
     return (
-        <Link to={to}  state={{ from: location.pathname }} className="new-item" title="Ajouter un élément">
+        <Link to={to}  state={{ from: from }} className="new-item" title="Ajouter un élément">
             <img src={plus} alt="" />
         </Link>
     )
