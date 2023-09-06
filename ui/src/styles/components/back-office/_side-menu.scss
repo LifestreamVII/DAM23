@@ -1,7 +1,8 @@
 .side-menu {
     width: 400px;
+    min-height: 100vh;
+
     background-color: $primary-color-10;
-    height: 100vh;
 
     nav {
         padding: 30px;
