@@ -38,3 +38,4 @@ class AssetController extends AbstractController
         return new JsonResponse(['message' => 'La vidéo a été ajoutée avec succès.']);
     }
 }
+
