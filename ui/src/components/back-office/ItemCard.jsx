@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom"
-import plus from "../../assets/images/icon-plus.svg"
+import { Link, useLocation } from "react-router-dom"
+import plus from "../../assets/images/icon-plus-white.svg"
 
 export function ProjectCard({ id, completion, title, description }) {
     
-    const truncatedDescription = description.length > 100 ? description.substring(0, 100) + "..." : description
+    const truncatedDescription = description.length > 100 ? description.substring(0, 80) + "..." : description
+    const from = useLocation().pathname
 
     return (
-        <Link to={`/admin/projects/${id}/programmation`} state={{ from: `/admin/projects` }} className="item-card">
+        <Link to={`/admin/projects/${id}/programmation`} state={{ from: from }} className="item-card">
             <p className="item-card__subtitle"><span>{completion}</span></p>
             <h3 className="item-card__title">{title}</h3>
             <p className="item-card__text">{truncatedDescription}</p>
@@ -14,34 +15,26 @@ export function ProjectCard({ id, completion, title, description }) {
     )
 }
 
-export function TaskCard({ id, status, date, title, description }) {
-        
-        return (
-            <Link to={`/admin/tasks/${id}`} state={{ from: `/admin/tasks` }} className="item-card">
-                <p className="item-card__subtitle"><span>{status}</span> - {date}</p>
-                <p className="item-card__title">{title}</p>
-                <p className="item-card__text">{description}</p>
-            </Link>
-        )
-}
-
 export function MediaCard({ id, mime, size, name, description }) {
 
+    const from = useLocation().pathname
+
     return (
-        <Link to={`/admin/medias/${id}`} state={{ from: `/admin/medias` }} className="item-card">
+        <Link to={`/admin/medias/${id}`} state={{ from: from }} className="item-card">
             <p className="item-card__subtitle"><span>{mime}</span> - {size}</p>
-            <h3 className="item-card__title">{description}</h3>
-            <p className="item-card__text">{name}</p>
+            <p className="item-card__title">{name}</p>
+            <h3 className="item-card__text">{description}</h3>
         </Link>
     )
 }
 
-export function NewItemCard({ page, text }) {
+export function NewItem({to}) {
+
+    const from = useLocation().pathname
 
     return (
-        <Link to={`/admin/${page}/new`} state={{ from: `/admin/${page}` }}  className="item-card item-card--new">
-            <img className="item-card__plus" src={plus} alt="" />
-            <h3 className="item-card__title">{text}</h3>
+        <Link to={to}  state={{ from: location.pathname }} className="new-item" title="Ajouter un élément">
+            <img src={plus} alt="" />
         </Link>
     )
 }
