@@ -16,11 +16,12 @@ use Firebase\JWT\JWT;
 
 class RegisterController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
+    #[Route('/api/login', name: 'app_login')]
     public function show(Request $request,EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher, string $appSecret): JsonResponse
     {
-        $password = $request->request->get('password');
-        $mail = $request->request->get('mail');
+        $content = json_decode($request->getContent(), true);
+        $password = $content['password'];
+        $mail = $content['mail'];
 
         $user = $entityManager->getRepository(User::class)->findOneBy(['mail' => $mail]);
 

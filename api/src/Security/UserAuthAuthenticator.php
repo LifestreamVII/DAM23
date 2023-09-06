@@ -2,70 +2,61 @@
 
 namespace App\Security;
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
-use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
-use Symfony\Component\Security\Http\Authenticator\Passport\UserPassportInterface;
-use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
-use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\CredentialsInterface;
-use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordAuthenticatedToken;
-use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
-use Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
-class CustomAuthenticator extends AbstractAuthenticator implements LogoutSuccessHandlerInterface
+
+class UserAuthAuthenticator extends AbstractAuthenticator
 {
-    private $security;
 
-    public function __construct(Security $security)
+    private $jwtManager;
+    public function __construct(JWTTokenManagerInterface $jwtManager)
     {
-        $this->security = $security;
+        $this->jwtManager = $jwtManager;
     }
+
 
     public function supports(Request $request): ?bool
     {
-        return $request->attributes->get('_route') === 'app_login' && $request->isMethod('POST');
-    }
+        // Vérifie si la demande contient un token JWT valide
 
-    public function authenticate(Request $request): PassportInterface
+        return isset(getallheaders()["Authorization"]);    }
+        
+    public function authenticate(Request $request): Passport
     {
-        $data = json_decode($request->getContent(), true);
+        $jwt = str_replace('Bearer ', "", $request->headers->get('Authorization'));
+        try {
+            $jwtDecoded = JWT::decode($jwt, new Key( $_ENV['JWT_PASSPHRASE'], "HS256"));
+            if (isset($jwtDecoded->exp) && $jwtDecoded->exp >= time()) {
 
-        $username = $data['username'] ?? '';
-        $password = $data['password'] ?? '';
-
-        if (empty($username) || empty($password)) {
-            throw new CustomUserMessageAuthenticationException('Missing username or password.');
+                return new SelfValidatingPassport(new UserBadge($jwtDecoded->mail));
+            } else {
+                throw new CustomUserMessageAuthenticationException('Le token JWT a expiré.');
+            }
+        } catch (\Exception $e) {
+            throw new AuthenticationException();
         }
-
-        return new SelfValidatingPassport(
-            new UserPassport($username),
-            new PasswordCredentials($password)
-        );
     }
 
-    public function onAuthenticationSuccess(Request $request, CredentialsInterface $credentials): ?Response
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        // You can customize the behavior after successful authentication here.
-        // For example, you can generate a JWT token and return it in the response.
-        // You can also redirect the user to a specific route.
-
-        return new JsonResponse(['message' => 'Authentication successful']);
+        // TODO: Implement onAuthenticationSuccess() method.
+        return null;
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        return new JsonResponse(['message' => $exception->getMessage()], Response::HTTP_UNAUTHORIZED);
-    }
-
-    public function onLogoutSuccess(Request $request): ?Response
-    {
-        return new JsonResponse(['message' => 'Logout successful']);
+        // TODO: Implement onAuthenticationFailure() method.
+        return new Response('Auth failed');
     }
 }
-?>
