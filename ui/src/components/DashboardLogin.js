@@ -78,17 +78,26 @@ function DashboardLogin() {
       });
 
       if (response.ok) {
-        setIsLoggedIn(true);
-        setError('');
+        const data = await response.json();
+        const userRole = data.role;
+  
+        if (userRole === 'admin' || userRole === 'chef de projet' || userRole === 'éditeur' || userRole === 'utilisateur') {
+          setIsLoggedIn(true);
+          setError('');
+        } else {
+          setIsLoggedIn(false);
+          setError('Vous n\'avez pas les autorisations requises.');
+        }
       } else {
         setIsLoggedIn(false);
         setError('Identifiant ou mot de passe incorrect');
       }
     } catch (error) {
       console.error('Une erreur s\'est produite lors de la requête :', error);
+      setIsLoggedIn(false);
+      setError('Une erreur s\'est produite. Veuillez réessayer plus tard.');
     }
   }
-
   function handleLogout() {
     setIsLoggedIn(false);
     setUsername('');
