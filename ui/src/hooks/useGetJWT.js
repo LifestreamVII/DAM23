@@ -1,4 +1,4 @@
-export default async function useGetJWT(mail, pwd) {
+export default async function useGetJWT(username, pwd) {
 
     const url = 'http://localhost:90/login'
     const payload = {
@@ -7,7 +7,7 @@ export default async function useGetJWT(mail, pwd) {
             'Content-type': 'application/x-www-form-urlencoded'
         }),
         body: new URLSearchParams({
-            mail: mail,
+            username: username,
             password: pwd
         })
     }
@@ -20,6 +20,7 @@ export default async function useGetJWT(mail, pwd) {
                 token: 'token',
                 message: 'Bienvenue, username'
             }
+        console.log(response);
         throw new Error()
     })
     .catch((error) => {

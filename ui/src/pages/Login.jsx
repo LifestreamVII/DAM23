@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 export default function Login() {
 
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [loggedUser, setLoggedUser] = useContext(userContext);
     const [message, setMessage] = useContext(messageBoxContext);
@@ -17,7 +17,7 @@ export default function Login() {
 
     function handleSubmit(e) {
         e.preventDefault()
-        getJWT(email, password).then(data => {
+        getJWT(username, password).then(data => {
             setMessage(data.message)
             console.log(data)
             setLoggedUser(data.user)
@@ -32,8 +32,8 @@ export default function Login() {
                 </Link>
                 <form action="" className="register__form" onSubmit={handleSubmit}>
                     <h1 className="register__title">Login</h1>
-                    <Input type="mail" setValue={setEmail} value={email}>
-                        Email
+                    <Input type="text" setValue={setUsername} value={username}>
+                        Nom d'utilisateur
                     </Input>
                     <Input type="password" setValue={setPassword} value={password}>
                         Mot de passe
