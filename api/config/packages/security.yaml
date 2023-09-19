@@ -20,26 +20,25 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            lazy: true
+            stateless: true
+            json_login:
+                provider: users
+                check_path: /api/login_check
+                username_path: username
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api:
+            pattern: ^/api/
+            stateless: true
             provider: users
-            entry_point: form_login
-            form_login:
-                login_path: app_login
-                check_path: app_login
-                enable_csrf: true
-            custom_authenticator: App\Security\UserAuthAuthenticator
-            logout:
-                path: app_logout
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+            jwt: ~
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api/admin, roles: ROLE_ADMIN }
+        - { path: ^/api/users, roles: ROLE_USER }
         - { path: ^/api/profile, roles: ROLE_USER }
         - { path: ^/api/cours, roles: ROLE_USER }
         - { path: ^/api/metadata, roles: ROLE_USER }
