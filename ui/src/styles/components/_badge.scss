@@ -1,0 +1,17 @@
+.badge {
+    display: inline-block;
+    padding: .5rem 1rem;
+    
+    font-size: .875rem;
+    color: #fff;
+
+    border: 2px solid;
+    border-color: $primary-color-10;
+    border-radius: 1rem;
+    background-color: $primary-color-07;
+
+    &--admin {
+        background-color: $secondary-color-07;
+        border-color: $secondary-color-10;
+    }
+}

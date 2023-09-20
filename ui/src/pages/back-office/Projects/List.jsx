@@ -1,4 +1,4 @@
-import {ProjectCard, NewItemCard} from "../../../components/back-office/ItemCard"
+import {ProjectCard, NewItem} from "../../../components/back-office/ItemCard"
 import { useContext } from "react";
 import useFetchUrl from "../../../hooks/useFetchUrl";
 import { useQuery } from 'react-query'
@@ -34,7 +34,7 @@ export default function ProjectsList() {
             
     return (
         <section className="back-office__container">
-            <NewItemCard page="projects" text="Nouveau projet" />
+            <NewItem page="projects" text="Nouveau projet" />
             {data.map((project, index) => {
                 return <ProjectCard key={index} id={project.id} title={project.title} completion={project.completion} description={project.description} />
             })}

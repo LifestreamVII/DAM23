@@ -83,6 +83,24 @@ class ProjectController extends AbstractController
         ]);
     }
 
+    #[Route('/project/{id}/users', name: 'app_project_users')]
+    public function users(EntityManagerInterface $entityManager, int $id, ManagerRegistry $doctrine): JsonResponse
+    {
+        $project = $entityManager->getRepository(Project::class)->findOneBy(['id' => $id]);
+
+        if (!$project) {
+            return new JsonResponse([
+                'message' => "Aucun projet trouvé pour l'id ".$id
+            ], 404);
+        }
+
+        $users = $project->getUsers($entityManager, $doctrine);
+
+        return new JsonResponse([
+            'users' => $users,
+        ]);
+    }
+
     #[Route('/project/{id}/edit', name: 'app_project_edit')]
     public function edit(Request $request, EntityManagerInterface $entityManager, int $id): JsonResponse
     {
@@ -145,6 +163,23 @@ class ProjectController extends AbstractController
                 'files' => $step->getFiles()
             ];
         }
+
+        $tasks = [];
+
+        foreach ($project->getTasks() as $task) {
+            $tasks[] = [
+                'id' => $task->getId(),
+                'title' => $task->getTitle(),
+                'description' => $task->getDescription(),
+                'status' => $task->getStatus(),
+                'date' => $task->getCreatedAt(),
+                'user' => [
+                    'id' => $task->getTaskReceiver()->getId(),
+                    'username' => $task->getTaskReceiver()->getUsername(),
+                    'role' => 'user',
+                ]
+            ];
+        }
         
         $data = [
             'id' => $project->getId(),
@@ -152,7 +187,8 @@ class ProjectController extends AbstractController
             'description' => $project->getDescription(),
             'completion' => $project->getCompletion(),
             'users' => $project->getUsers($entityManager, $doctrine),
-            'steps' => $steps,
+            'tasks' => $tasks,
+            // 'steps' => $steps,
             'currentStep' => $project->getCurrentStep(),
         ];
 

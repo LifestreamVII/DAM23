@@ -1,0 +1,28 @@
+.projects {
+    .item-card {
+        flex-basis: calc(25% - 41px);
+    }
+}
+
+.project {
+
+    h1 {
+        margin-bottom: 1.5rem;
+    }
+}
+
+.project__description {
+    padding-left: .7rem;
+    max-width: 550px;
+}
+
+.project__container {
+    display: flex;
+    gap: 10px;
+}
+
+.project__tasks {
+    .item-card {
+        flex-basis: calc(30% - 38px);
+    }
+}

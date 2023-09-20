@@ -1,5 +1,31 @@
 .side-menu {
     width: 400px;
+    min-height: 100vh;
+
     background-color: $primary-color-10;
-    height: 100vh;
+
+    nav {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+}
+
+.side-menu__logo {
+    margin: 20px auto;
+    height: 70px;
+}
+
+.side-menu__link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    font-size: 0.875rem;
+    color: #fff;
+    
+    img {
+        height: 1.5rem;
+    }
 }
