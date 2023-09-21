@@ -8,34 +8,36 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Video;
+use App\Entity\Asset;
 
 class AssetController extends AbstractController
 {
-    #[Route('/asset', name: 'app_asset')]
-    public function index(): Response
+    public function __invoke(Request $request): Asset
     {
-        return $this->render('asset/index.html.twig', [
-            'controller_name' => 'AssetController',
-        ]);
+		$asset = new Asset();
+		$asset->setFile($request->request->get("name"));
+		$asset->setAsset($request->request->get("file"));
+		return $video;
     }
-    #[Route('/asset/add', name: 'app_asset_add')]
-    public function addVideo(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    /**
+    * #[Route('/assets', name='app_assets', methods={"POST","GET"})]
+    */
+    public function index(EntityManagerInterface $entityManager): JsonResponse
     {
-        $data = json_decode($request->getContent(), true);
+        $assets = $entityManager->getRepository(Asset::class)->findAll();
 
-        if (!isset($data['url'])) {
-            return new JsonResponse(['message' => 'L\'URL de la vidéo est manquante.'], 400);
+        $data = [];
+
+        foreach ($assets as $asset) {
+            $data[] = [
+                'id' => $asset->getId(),
+                'filename' => $asset->getFile(),
+            ];
         }
 
-        $video = new Video();
-        
-        $video->setUrl($data['url']);
-
-        $entityManager->persist($video);
-        $entityManager->flush(); 
-
-        return new JsonResponse(['message' => 'La vidéo a été ajoutée avec succès.']);
+        return new JsonResponse([
+            'assets' => $data
+        ]);
     }
 }
 

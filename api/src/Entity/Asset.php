@@ -3,21 +3,35 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\GetCollection;
+use App\Controller\AssetController;
 use App\Repository\AssetRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: AssetRepository::class)]
-#[ApiResource]
+#[ApiResource(
+        operations:[
+		new Post(controller: AssetController::class, deserialize: false)
+	],
+	normalizationContext: ["groups"=>["read"]]
+)]
+#[Vich\Uploadable]
 class Asset
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[groups("read")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[groups("read")]
     private ?string $file = null;
 
     #[ORM\ManyToOne(inversedBy: 'assets')]
@@ -36,6 +50,9 @@ class Asset
 
     #[ORM\Column(type: "string", enumType: AssetType::class)]
     private AssetType $type;
+
+    #[Vich\UploadableField(mapping: 'assets_upload', fileNameProperty: 'file', size: 'imageSize')]
+    private ?File $asset = null;
 
     public function __construct()
     {
@@ -100,6 +117,15 @@ class Asset
 
         return $this;
     }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $asset
+     */
+    public function setAsset(?File $asset = null): void
+    {
+        $this->asset = $asset;
+    }
+
 
     public function removeAssetHistory(AssetHistory $assetHistory): static
     {

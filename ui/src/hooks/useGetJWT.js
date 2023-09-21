@@ -1,15 +1,15 @@
 export default async function useGetJWT(username, pwd) {
 
-    const url = 'http://localhost:90/login'
+    const url = 'http://37.187.124.78:90/api/login'
     const payload = {
         method: 'POST',
         headers: new Headers({
             'Content-type': 'application/x-www-form-urlencoded'
         }),
-        body: new URLSearchParams({
-            username: username,
+        body: {
+            mail: username,
             password: pwd
-        })
+        }
     }
 
     const message = await fetch(url, payload)
@@ -17,8 +17,8 @@ export default async function useGetJWT(username, pwd) {
         if (response.ok)
             // return response.json()
             return {
-                token: 'token',
-                message: 'Bienvenue, username'
+                token: `${response.jwt}`,
+                message: `${response.message}`
             }
         console.log(response);
         throw new Error()
